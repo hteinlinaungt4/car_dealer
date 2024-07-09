@@ -36,30 +36,32 @@ class UserController extends Controller
         $user=User::where('role','user');
         return DataTables::of($user)
         ->addColumn('actions', function($each) {
-            return '<button class="btn btn-success role-btn" data-id="' . $each->id . '" >Change to Admin</button>';
+            return '<button class="btn btn-danger delete_btn" data-id="' . $each->id . '" >Delete</button>';
         })
         ->rawColumns(['actions'])
         ->make(true);
     }
 
-    public function usertoadmin(Request $request,$userId){
-
-        $user = User::findOrFail($userId);
-
-        // Update the user's role based on the role data sent via AJAX request
-        $user->role = $request->role; // Assuming the role data is sent in the request
-
-        // Save the updated user
-        $user->save();
-
-        // Return a success response
-        return response()->json(['message' => 'User role changed successfully']);
+    public function delete(string $id)
+    {
+        $user = User::findOrFail($id);
+        $user->delete();
+        $data=[
+            'msg' => 'success',
+        ];
+        return response()->json($data, 200);
     }
 
 
 
+
+
     public function about(){
-        return view('user.about');
+        return view('user.aboutus');
+    }
+
+    public function contact(){
+        return view('user.contact');
     }
 
 
@@ -84,12 +86,7 @@ class UserController extends Controller
         }
     }
 
-    function updatemyprofile(Request $request){
-        $id=Auth::user()->id;
-        $updateData=$this->getData($request);
-        User::where('id',$id)->update($updateData);
-        return redirect()->route('user.dashboard');
-    }
+
 
     private function getData($request){
         $data=[

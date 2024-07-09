@@ -13,7 +13,7 @@
     <title>@yield('title')</title>
 
     <!-- Bootstrap core CSS -->
-    <link href="{{asset('user/vendor/bootstrap/css/bootstrap.min.css')}}" rel="stylesheet">
+    <link href="{{ asset('user/vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
 
     <!-- Additional CSS Files -->
     <link rel="stylesheet" href="{{ asset('user/assets/css/fontawesome.css') }}">
@@ -27,7 +27,7 @@
     <header class="">
         <nav class="navbar navbar-expand-lg">
             <div class="container">
-                <a class="navbar-brand" href="{{route('user.dashboard')}}">
+                <a class="navbar-brand" href="{{ route('user.dashboard') }}">
                     <h2>Car <em>Dealer</em></h2>
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
@@ -37,27 +37,43 @@
                 <div class="collapse navbar-collapse" id="navbarResponsive">
                     <ul class="navbar-nav ml-auto ">
                         <li class="nav-item active">
-                            <a class="nav-link" href="index.php">Home
+                            <a class="nav-link" href="{{ route('user.dashboard') }}">Home
                             </a>
                         </li>
-                        <li class="nav-item"><a class="nav-link" href="about-us.php">About</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{{ route('about') }}">About</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{{ route('contact') }}">Contact</a></li>
                         @if (!Auth::check())
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('login') }}"><i
-                                class="fa fa-user-circle" aria-hidden="true"></i> Login</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('register') }}"><i
-                                class="fa fa-user-circle" aria-hidden="true"></i> Register
-                            </a>
-                        </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('login') }}"><i class="fa fa-user-circle"
+                                        aria-hidden="true"></i> Login</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('register') }}"><i class="fa fa-user-circle"
+                                        aria-hidden="true"></i> Register
+                                </a>
+                            </li>
                         @else
-                        <li class="nav-item">
-                            <form class="nav-link"  method="POST" action="{{ route('logout') }}">
-                                @csrf
-                                <button class=" bg-transparent text-white border-0"><i class="fa fa-user-circle " aria-hidden="true"></i> Logout</button>
-                            </form>
-                        </li>
+                            <li class="dropdown nav-item"> <a href="#" class="nav-link" data-toggle="dropdown"
+                                    aria-haspopup="true" aria-expanded="false"><i class="fa fa-user-circle"
+                                        aria-hidden="true"></i>
+                                    {{ Auth::user()->name }}
+                                    <i class="fa fa-angle-down" aria-hidden="true"></i></a>
+                                <ul class="dropdown-menu">
+                                    <li class="nav-item"><a class="nav-link" href="">Profile</a></li>
+                                    <li class="nav-item"><a class="nav-link" href="">Password Update</a></li>
+                                    <li class="nav-item"><a class="nav-link" href="">My Book</a></li>
+                                    <li class="nav-item">
+                                        <form class="nav-link" method="POST" action="{{ route('logout') }}">
+                                            @csrf
+                                            <button class=" bg-transparent text-white border-0">Logout</button>
+                                        </form>
+                                    </li>
+                                </ul>
+                            </li>
+
+
+
+
                         @endif
 
                     </ul>
@@ -75,6 +91,18 @@
 
     @yield('content')
 
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="inner-content">
+                        <p>Copyright © Preowned Car Selling Portal </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
 
 
     <!-- Bootstrap core JavaScript -->
@@ -83,6 +111,8 @@
     <!-- Additional Scripts -->
     <script src="{{ asset('user/assets/js/custom.js') }}"></script>
     <script src="{{ asset('user/assets/js/owl.js') }}"></script>
+
+    @yield('script')
 </body>
 
 </html>

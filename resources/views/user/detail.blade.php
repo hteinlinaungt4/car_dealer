@@ -27,7 +27,7 @@
                         @foreach ($cars as $c)
                             <div class="col-md-4">
                                 <div class="product-item">
-                                    <a href=""><img src="{{asset('storage/cars/'.$c->image1)}}" height="250"></a>
+                                    <a href="{{route('car.detail',$c->id)}}"><img src="{{asset('storage/cars/'.$c->image1)}}" height="250"></a>
                                     <div class="down-content">
                                         <a href="">
                                             <h4>{{$c->name}}</h4>

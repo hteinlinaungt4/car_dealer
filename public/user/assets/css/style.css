@@ -1105,3 +1105,10 @@ footer .inner-content p a {
 		margin-bottom: 20px;
 	}
 }
+.navbar .navbar-nav .nav-link:hover, .navbar .navbar-nav .active>.nav-link, .navbar .navbar-nav .nav-link.active, .navbar .navbar-nav .nav-link.show, .navbar .navbar-nav .show>.nav-link {
+
+    border-bottom: none !important;
+}
+.dropdown-menu{
+    background-color: #f33f3f!important;
+}

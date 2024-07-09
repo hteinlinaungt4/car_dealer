@@ -101,7 +101,7 @@ class CarController extends Controller
         Validator::make($request->all(), $validation)->validate();
 
         $images = [];
-        for ($i = 1; $i <= 4; $i++) {
+        for ($i = 1; $i <= 3; $i++) {
             if ($request->hasFile('image' . $i)) {
                 $file = $request->file('image' . $i);
                 $filename = uniqid() . '_' . $file->getClientOriginalName();
@@ -116,7 +116,6 @@ class CarController extends Controller
         $car->image1 = $images['image1'];
         $car->image2 = $images['image2'];
         $car->image3 = $images['image3'];
-        $car->image4 = $images['image4'];
         $car->type = $request->input('type');
         $car->body_color = $request->input('body_color');
         $car->body_type = $request->input('body_type');
@@ -191,7 +190,6 @@ class CarController extends Controller
             'image1' => 'nullable|mimes:jpg,jpeg,png|file',
             'image2' => 'nullable|mimes:jpg,jpeg,png|file',
             'image3' => 'nullable|mimes:jpg,jpeg,png|file',
-            'image4' => 'nullable|mimes:jpg,jpeg,png|file',
             'type' => 'required|string|max:255',
             'body_color' => 'required|string|max:255',
             'body_type' => 'required|string|max:255',
@@ -232,7 +230,7 @@ class CarController extends Controller
         Validator::make($request->all(), $validation)->validate();
 
         $images = [];
-        for ($i = 1; $i <= 4; $i++) {
+        for ($i = 1; $i <= 3; $i++) {
             if ($request->hasFile('image' . $i)) {
                 // Delete the old image if a new one is uploaded
                 if ($car->{'image' . $i}) {
@@ -253,7 +251,6 @@ class CarController extends Controller
         $car->image1 = $images['image1'];
         $car->image2 = $images['image2'];
         $car->image3 = $images['image3'];
-        $car->image4 = $images['image4'];
         $car->type = $request->input('type');
         $car->body_color = $request->input('body_color');
         $car->body_type = $request->input('body_type');
@@ -305,7 +302,7 @@ class CarController extends Controller
         $car = Car::findOrFail($id);
 
         // Delete the associated image files
-        for ($i = 1; $i <= 4; $i++) {
+        for ($i = 1; $i <= 3; $i++) {
             if ($car->{'image' . $i}) {
                 Storage::delete('public/cars/' . $car->{'image' . $i});
             }
@@ -326,6 +323,11 @@ class CarController extends Controller
         $company=Company::where('id',$id)->first();
         $cars=Car::with('company')->where('company_id',$id)->get();
         return view('user.detail',compact('cars','company'));
+    }
+
+    public function detail($id){
+        $car=Car::with('company')->findorFail($id);
+        return view('user.cardetail',compact('car'));
     }
 
 

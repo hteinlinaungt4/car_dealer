@@ -4,9 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Models\Company;
 use Illuminate\Http\Request;
+use Illuminate\Log\Logger;
 use Yajra\DataTables\DataTables;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
+use PhpOffice\PhpSpreadsheet\Writer\Xlsx\Rels;
 
 class CompanyController extends Controller
 {
@@ -139,5 +141,12 @@ class CompanyController extends Controller
             'msg' => 'success',
         ];
         return response()->json($data, 200);
+    }
+
+    public function search(Request $request){
+        $query = $request->key;
+        $companies = Company::where('name', 'LIKE', "%{$query}%")->get();
+
+        return response()->json($companies);
     }
 }

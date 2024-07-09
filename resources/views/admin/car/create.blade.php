@@ -57,12 +57,7 @@
                                     </div>
                                 </div>
 
-                                <div class="form-group">
-                                    <label class="col-sm-2 control-label">Car Image4</label>
-                                    <div class="col-sm-10">
-                                        <input type="file" class="form-control" name="image4" id="image4" >
-                                    </div>
-                                </div>
+
 
                                 <div class="form-group">
                                     <label class="col-sm-2 control-label">Car Type</label>

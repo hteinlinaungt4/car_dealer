@@ -17,7 +17,6 @@ return new class extends Migration {
             $table->string('image1');
             $table->string('image2');
             $table->string('image3');
-            $table->string('image4');
             $table->string('type');
             $table->string('body_color');
             $table->string('body_type');

@@ -58,14 +58,7 @@
                                         <input type="file" class="form-control" name="image3" id="image3">
                                     </div>
                                 </div>
-                                <img class=" object-cover" src="{{asset('storage/cars/'.$car->image4)}}" width="150px" height="150px" alt="">
 
-                                <div class="form-group">
-                                    <label class="col-sm-2 control-label">Car Image4</label>
-                                    <div class="col-sm-10">
-                                        <input type="file" class="form-control" name="image4" id="image4">
-                                    </div>
-                                </div>
 
                                 <div class="form-group">
                                     <label class="col-sm-2 control-label">Car Type</label>

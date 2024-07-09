@@ -53,12 +53,12 @@
                 Interface
             </div>
 
-            <li class="nav-item">
+            {{-- <li class="nav-item">
                 <a class="nav-link" href="" >
                     <i class="fa-solid fa-gauge"></i>
                     <span>Dashboard</span>
                 </a>
-            </li>
+            </li> --}}
 
             <!-- Nav Item - Charts -->
             <li class="nav-item">
@@ -77,46 +77,26 @@
 
              <!-- Nav Item - Tables -->
              <li class="nav-item">
-                <a class="nav-link"  href="">
+                <a class="nav-link"  href="{{route('admin.book')}}">
                     <i class="fa-solid fa-book"></i>
                     <span>Booking Lists</span></a>
             </li>
 
             <li class="nav-item">
-                <a class="nav-link" href="" >
+                <a class="nav-link" href="{{route('userlist')}}" >
                     <i class="fas fa-users"></i>
-                    <span>Admin Lists</span>
+                    <span>User Lists</span>
                  </a>
             </li>
 
-            <li class="nav-item">
-                <a class="nav-link" href="" >
-                    <i class="fas fa-users"></i>
-                    <span>Users Lists</span>
-                 </a>
-            </li>
 
-            <li class="nav-item">
-                <a class="nav-link" href="" >
-                    <i class="fa fa-envelope"></i>
-                    <span>Contants</span>
-                 </a>
-            </li>
 
-            <li class="nav-item">
-                <a class="nav-link" href="">
-                    <i class="fa-regular fa-message"></i>
-                    <span>Testimonial</span>
-                 </a>
-            </li>
 
             <!-- Divider -->
             <hr class="sidebar-divider d-none d-md-block">
 
             <!-- Sidebar Toggler (Sidebar) -->
-            <div class="text-center d-none d-md-inline">
-                <button class="rounded-circle border-0" id="sidebarToggle"></button>
-            </div>
+
         </ul>
         <!-- End of Sidebar -->
 
@@ -147,7 +127,7 @@
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
                                 aria-labelledby="userDropdown">
-                                <a class="dropdown-item" href="" >
+                                <a class="dropdown-item" href="{{route('adminpassword#changepage')}}" >
                                     <i class="fas fa-lock fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Change Password
                                 </a>

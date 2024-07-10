@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('email');
-            $table->decimal('phone');
+            $table->string('phone');
             $table->unsignedBigInteger('car_id');
             $table->longText('message');
             $table->enum('status',['0','1'])->default('0');

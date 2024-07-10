@@ -81,6 +81,7 @@
             e.preventDefault();
             var id = $(this).data('id');
             var status = $(this).data('status');
+            var car_id = $(this).data('car_id');
             var newStatus = status == '0' ? '1' : '0';
             var url = `/book/${id}/status`;
             $.ajax({
@@ -88,7 +89,8 @@
                 type: 'POST',
                 data: {
                     _token: '{{ csrf_token() }}',
-                    status: newStatus
+                    status: newStatus,
+                    car_id
                 },
                 success: function(response) {
                             table.ajax.reload();

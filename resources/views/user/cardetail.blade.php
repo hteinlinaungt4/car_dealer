@@ -19,7 +19,7 @@
             <div class="row">
                 <div class="col-md-6">
                     <div>
-                        <img src="{{asset('storage/cars/'.$car->image1)}}" class="img-fluid wc-image">
+                        <img src="{{asset('storage/cars/'.$car->image1)}}" class="img-fluid wc-image object-cover w-100">
                     </div>
                     <br>
                     <div class="row">

@@ -60,7 +60,6 @@ class CarController extends Controller
             'image1' => 'required|mimes:jpg,jpeg,png|file',
             'image2' => 'required|mimes:jpg,jpeg,png|file',
             'image3' => 'required|mimes:jpg,jpeg,png|file',
-            'image4' => 'required|mimes:jpg,jpeg,png|file',
             'type' => 'required|string|max:255',
             'body_color' => 'required|string|max:255',
             'body_type' => 'required|string|max:255',
@@ -327,8 +326,81 @@ class CarController extends Controller
 
     public function detail($id){
         $car=Car::with('company')->findorFail($id);
+        $car->view = $car->view + 1;
+        $car->update();
         return view('user.cardetail',compact('car'));
     }
+
+
+    public function mostinterest()
+    {
+        $cars = Car::with('company')
+        ->where('view', '>', 0)  // Filter out records with 0 views
+        ->orderBy('view')        // Order by the 'view' attribute
+        ->take(10)               // Take the top 10 records
+        ->get();
+        return view('user.most',compact('cars'));
+    }
+
+    public function bestsell()
+    {
+        $cars = Car::with('company')
+        ->where('order', '>', 0)  // Filter out records with 0 views
+        ->orderBy('view')        // Order by the 'view' attribute
+        ->take(10)               // Take the top 10 records
+        ->get();
+        return view('user.bestsell',compact('cars'));
+    }
+
+    public function most(){
+        return view('admin.Most Interest.index');
+    }
+
+    public function best(){
+        return view('admin.Best Sell.index');
+    }
+
+
+    public function mostssd() {
+        $car = Car::with('company')
+            ->where('view', '>', 0)
+            ->orderBy('view');
+        return DataTables::of($car)
+            ->filterColumn('company', function($query, $keyword) {
+                $query->whereHas('company', function($q1) use ($keyword) {
+                    $q1->where('name', 'like', '%' . $keyword . '%');
+                });
+            })
+            ->addColumn('image', function($each) {
+                return '<img style="width:100px;height:100px;" class="object-cover" src="' . asset('storage/cars/' . $each->image1) . '" />';
+            })
+            ->addColumn('company', function($each) {
+                return $each->company->name;
+            })
+            ->rawColumns(['image'])
+            ->make(true);
+    }
+
+    public function bestssd() {
+        $car = Car::with('company')
+            ->where('order', '>', 0)
+            ->orderBy('order');
+        return DataTables::of($car)
+            ->filterColumn('company', function($query, $keyword) {
+                $query->whereHas('company', function($q1) use ($keyword) {
+                    $q1->where('name', 'like', '%' . $keyword . '%');
+                });
+            })
+            ->addColumn('image', function($each) {
+                return '<img style="width:100px;height:100px;" class="object-cover" src="' . asset('storage/cars/' . $each->image1) . '" />';
+            })
+            ->addColumn('company', function($each) {
+                return $each->company->name;
+            })
+            ->rawColumns(['image'])
+            ->make(true);
+    }
+
 
 
 

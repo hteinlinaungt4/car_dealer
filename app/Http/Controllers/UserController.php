@@ -66,7 +66,7 @@ class UserController extends Controller
 
 
     function changepasswordpage(){
-        return view('user.updatepassword');
+        return view('user.changepassword');
     }
     // ChangePassword
     function changepassword(Request $request){

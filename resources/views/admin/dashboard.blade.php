@@ -90,6 +90,21 @@
             </li>
 
 
+            <li class="nav-item">
+                <a class="nav-link" href="{{route('most')}}" >
+                    <i class="fa fa-car"></i>
+                    <span>Most Interest</span>
+                 </a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" href="{{route('best')}}" >
+                    <i class="fa fa-car"></i>
+                    <span>Best Sell Cars</span>
+                 </a>
+            </li>
+
+
 
 
             <!-- Divider -->

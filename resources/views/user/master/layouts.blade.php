@@ -42,6 +42,8 @@
                         </li>
                         <li class="nav-item"><a class="nav-link" href="{{ route('about') }}">About</a></li>
                         <li class="nav-item"><a class="nav-link" href="{{ route('contact') }}">Contact</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{{route('car.interest')}}">Most Interest Cars</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{{route('car.bestsell')}}">Best Sell Cars</a></li>
                         @if (!Auth::check())
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ route('login') }}"><i class="fa fa-user-circle"
@@ -59,9 +61,7 @@
                                     {{ Auth::user()->name }}
                                     <i class="fa fa-angle-down" aria-hidden="true"></i></a>
                                 <ul class="dropdown-menu">
-                                    <li class="nav-item"><a class="nav-link" href="">Profile</a></li>
-                                    <li class="nav-item"><a class="nav-link" href="">Password Update</a></li>
-                                    <li class="nav-item"><a class="nav-link" href="">My Book</a></li>
+                                    <li class="nav-item"><a class="nav-link" href="{{route('userpassword#changepage')}}">Password Update</a></li>
                                     <li class="nav-item">
                                         <form class="nav-link" method="POST" action="{{ route('logout') }}">
                                             @csrf

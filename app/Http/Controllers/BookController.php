@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Car;
 use App\Models\Book;
+use Illuminate\Log\Logger;
 use Illuminate\Http\Request;
 use Yajra\DataTables\DataTables;
 
@@ -33,7 +35,7 @@ class BookController extends Controller
         })
         ->addColumn('actions', function($each) {
             $statusButton = $each->status == '0'
-                ? '<button class="btn btn-success status-btn" data-id="' . $each->id . '" data-status="' . $each->status . '">Mark as Active</button>'
+                ? '<button class="btn btn-success status-btn"  data-car_id="' . $each->car_id . '"  data-id="' . $each->id . '" data-status="' . $each->status . '">Mark as Active</button>'
                 : '<button disabled class="btn btn-warning status-btn" data-id="' . $each->id . '" data-status="' . $each->status . '">Actived</button>';
 
             return '<div class="d-flex justify-content-center">' . $statusButton . '</div>';
@@ -47,6 +49,10 @@ class BookController extends Controller
 
     public function updateStatus(Request $request, $id)
     {
+        $car=Car::findorFail($request->car_id);
+        $car->order = $car->order + 1;
+        $car->save();
+
         $book = Book::findOrFail($id);
         $book->status = $request->status;
         $book->save();

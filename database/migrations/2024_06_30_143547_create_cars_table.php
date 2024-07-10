@@ -52,6 +52,8 @@ return new class extends Migration {
             $table->string('insurance_type');
             $table->string('rto');
             $table->integer('km_driven');
+            $table->integer('view')->default(0);
+            $table->integer('order')->default(0);
             $table->timestamps();
         });
     }

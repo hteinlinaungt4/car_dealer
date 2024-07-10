@@ -54,7 +54,9 @@ class Car extends Model
         'no_of_owners',
         'insurance_type',
         'rto',
-        'km_driven'
+        'km_driven',
+        'order',
+        'view'
     ];
 
 

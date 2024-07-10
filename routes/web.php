@@ -52,6 +52,16 @@ Route::middleware(['auth:sanctum',config('jetstream.auth_session'),'verified',])
         Route::post('/userdelete/{id}',[UserController::class,"delete"]);
 
 
+        // most interest
+        Route::get('most',[CarController::class,'most'])->name('most');
+        Route::get('ssd/most',[CarController::class,'mostssd']);
+
+        // best
+        Route::get('best',[CarController::class,'best'])->name('best');
+        Route::get('ssd/best',[CarController::class,'bestssd']);
+
+
+
 
         // password
         Route::prefix('adminpassword')->group(function(){
@@ -64,6 +74,12 @@ Route::middleware(['auth:sanctum',config('jetstream.auth_session'),'verified',])
         Route::get('carlist/{id}',[CarController::class,'carlistdetail'])->name('carlist');
         Route::get('cardetail/{id}',[CarController::class,'detail'])->name('car.detail');
         Route::post('book',[BookController::class,'userorder'])->name("user.order");
+
+         // password
+         Route::prefix('password')->group(function(){
+            Route::get('changepage',[UserController::class,'changepasswordpage'])->name('userpassword#changepage');
+            Route::post('change',[UserController::class,'changepassword'])->name('userpassword#change');
+        });
     });
 });
 
@@ -73,6 +89,10 @@ Route::get('user/dashboard',[UserController::class,'index'])->name('user.dashboa
 Route::get('search',[CompanyController::class,'search']);
 Route::get('about',[UserController::class,'about'])->name('about');
 Route::get('contact',[UserController::class,'contact'])->name('contact');
+Route::get('mostinterest',[CarController::class,'mostinterest'])->name('car.interest');
+Route::get('bestsell',[CarController::class,'bestsell'])->name('car.bestsell');
+
+
 
 
 

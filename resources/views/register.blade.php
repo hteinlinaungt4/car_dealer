@@ -58,7 +58,7 @@
                 </div>
                 <span class="pull-right"> <a href="{{route('login')}}">If you have account?  Login</a></span>
                 <button class="btn btn-primary btn-lg btn-block" type="submit" name="login">Register</button>
-                <p style="margin-top:3%; font-weight:bold"><a href="route('user.dashboard')">Back to Home page</a></p>
+                <p style="margin-top:3%; font-weight:bold"><a href="{{route('user.dashboard')}}">Back to Home page</a></p>
             </div>
         </form>
 

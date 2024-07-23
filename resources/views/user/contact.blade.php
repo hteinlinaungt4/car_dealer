@@ -30,11 +30,11 @@
                 <div class="col-md-12">
                     <div class="left-content">
                         <h4>Address</h4>
-                        <p>Taunggyi(Shan State)</p>
+                        <p>{{$contact->address}}</p>
                         <h4>Email</h4>
-                        <p>example.gmail.com</p>
+                        <p>{{$contact->email}}</p>
                         <h4>Phone Number</h4>
-                        <p>+95xxxxx</p>
+                        <p>{{$contact->phone}}</p>
                         <p>you can contact us on the above details
                         </p>
                     </div>

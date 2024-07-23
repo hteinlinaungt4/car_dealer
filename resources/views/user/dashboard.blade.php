@@ -31,14 +31,14 @@
                     placeholder="Search Car Brand...">
             </div>
         </div>
-        <div class="container">
+        <div class="container mb-3">
             <h3 class="mb-3">Car Brands</h3>
             <div class="row" id="result">
                     @foreach ($company as $c)
                         <div class="col-md-3">
                             <div class="service-item">
                                 <div class="icon">
-                                    <img src="{{ asset('storage/company/' . $c->image) }}" width="200" height="100">
+                                    <img src="{{ asset('storage/company/' . $c->image) }}" width="180" height="100">
                                 </div>
                                 <a href="{{ route('carlist', $c->id) }}">
                                     <div class="down-content">
@@ -50,9 +50,101 @@
                     @endforeach
 
             </div>
-
-
         </div>
+
+        @if(count($cars) != 0)
+        <div class="container">
+            <h3 class="mt-5">Most Interest Cars</h3>
+            <div class="products">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="row">
+                                @foreach ($cars as $c)
+                                    <div class="col-md-4">
+                                        <div class="product-item">
+                                            <a href="{{route('car.detail',$c->id)}}"><img src="{{asset('storage/cars/'.$c->image1)}}" height="250" class=" object-cover"></a>
+                                            <div class="down-content">
+                                                <a href="">
+                                                    <h4>{{$c->name}} {{$c->model}}</h4>
+                                                </a>
+
+                                                <h6> {{$c->price}} MMK</h6>
+
+
+                                                <small>
+                                                    <strong title="Author"><i class="fa fa-code-fork" aria-hidden="true"></i>
+                                                        {{$c->transmission}}</strong>
+                                                    &nbsp;&nbsp;
+                                                    <strong title="Author"><i class="fa fa-street-view" aria-hidden="true"></i>
+                                                        {{$c->position}}</strong>&nbsp;&nbsp;
+                                                    <strong title="Views"><i class="fa fa-fire" aria-hidden="true"></i>{{$c->fuel_type}}</strong>
+                                                </small>
+                                            </div>
+                                        </div>
+                                    </div>
+                                @endforeach
+                            </div>
+                            <div class="float-right mb-3">
+                                <a href="{{route('car.interest')}}" class="btn btn-danger btn-sm" >See More Interest Car</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        @else
+        <h3 style="color: red;" class="text-center my-5">Today, we do not have the most interest list</h3>
+        @endif
+
+
+
+        @if(count($car) != 0)
+        <div class="container">
+            <h3 class="mt-5">Best Sell Cars</h3>
+            <div class="products">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="row">
+                                @foreach ($car as $c)
+                                    <div class="col-md-4">
+                                        <div class="product-item">
+                                            <a href="{{route('car.detail',$c->id)}}"><img src="{{asset('storage/cars/'.$c->image1)}}" height="250" class=" object-cover"></a>
+                                            <div class="down-content">
+                                                <a href="">
+                                                    <h4>{{$c->name}} {{$c->model}}</h4>
+                                                </a>
+
+                                                <h6> {{$c->price}} MMK</h6>
+
+
+                                                <small>
+                                                    <strong title="Author"><i class="fa fa-code-fork" aria-hidden="true"></i>
+                                                        {{$c->transmission}}</strong>
+                                                    &nbsp;&nbsp;
+                                                    <strong title="Author"><i class="fa fa-street-view" aria-hidden="true"></i>
+                                                        {{$c->position}}</strong>&nbsp;&nbsp;
+                                                    <strong title="Views"><i class="fa fa-fire" aria-hidden="true"></i>{{$c->fuel_type}}</strong>
+                                                </small>
+                                            </div>
+                                        </div>
+                                    </div>
+                                @endforeach
+
+
+                            </div>
+                            <div class="float-right mb-3">
+                                <a href="{{route('car.bestsell')}}" class="btn btn-danger btn-sm" >See More Best Sell Car</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        @else
+        <h3 style="color: red;" class="text-center my-5">Today, we do not have the best-seller list</h3>
+        @endif
     </div>
 
 @endsection

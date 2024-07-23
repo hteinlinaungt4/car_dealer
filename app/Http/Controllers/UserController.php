@@ -2,111 +2,159 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Car;
+use App\Models\Company;
 use Illuminate\Http\Request;
 use Yajra\DataTables\DataTables;
 use App\Http\Controllers\Controller;
-use App\Models\Company;
+use App\Models\About;
+use App\Models\Contact;
 use Illuminate\Foundation\Auth\User;
+use Illuminate\Log\Logger;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 
 class UserController extends Controller
 {
-      //
-      public function index(){
+    //
+    public function index()
+    {
         $company = Company::all();
-        return view('user.dashboard',compact('company'));
+        $cars = Car::with('company')
+            ->where('view', '>', 0) // Filter out records with 0 views
+            ->orderBy('view') // Order by the 'view' attribute
+            ->take(3) // Take the top 10 records
+            ->get();
+        $car = Car::with('company')
+            ->where('order', '>', 0) // Filter out records with 0 views
+            ->orderBy('order') // Order by the 'view' attribute
+            ->take(3) // Take the top 10 records
+            ->get();
+        return view('user.dashboard', compact('company', 'cars', 'car'));
     }
 
-
-
-    public function myprofile(){
-        return view('user.myprofile',);
+    public function myprofile()
+    {
+        return view('user.myprofile');
     }
 
+    public function fav()
+    {
+        $user = Auth::user();
+        $fav = $user->cars;
+        return view('user.fav', compact('fav'));
+    }
 
-
-    public function userlist(){
+    public function userlist()
+    {
         return view('admin.userlist.index');
     }
 
-
-    public function ssd(){
-        $user=User::where('role','user');
+    public function ssd()
+    {
+        $user = User::where('role', 'user');
         return DataTables::of($user)
-        ->addColumn('actions', function($each) {
-            return '<button class="btn btn-danger delete_btn" data-id="' . $each->id . '" >Delete</button>';
-        })
-        ->rawColumns(['actions'])
-        ->make(true);
+            ->addColumn('actions', function ($each) {
+                return '<button class="btn btn-danger delete_btn" data-id="' . $each->id . '" >Delete</button>';
+            })
+            ->rawColumns(['actions'])
+            ->make(true);
     }
 
     public function delete(string $id)
     {
         $user = User::findOrFail($id);
         $user->delete();
-        $data=[
+        $data = [
             'msg' => 'success',
         ];
         return response()->json($data, 200);
     }
 
-
-
-
-
-    public function about(){
-        return view('user.aboutus');
+    public function favremove($id)
+    {
+        $user = Auth::user();
+        $car = Car::findOrFail($id);
+        if ($user->cars()->where('car_id', $id)->exists()) {
+            $user->cars()->detach($id);
+            $data = [
+                'msg' => 'success',
+            ];
+            return response()->json($data, 200);
+        }
+        $data = [
+            'msg' => 'Fail',
+        ];
+        return response()->json($data, 400);
     }
 
-    public function contact(){
-        return view('user.contact');
+    public function addfav($id)
+    {
+        $car=Car::findorFail($id);
+        $user = Auth::user();
+        if (!$user->cars()->where('car_id', $car->id)->exists()) {
+            $user->cars()->attach($car);
+        }
+        $data=[
+            'msg' => 'Success',
+        ];
+        return response()->json($data, 200);
     }
 
+    public function about()
+    {
+        $about=About::find(1);
+        return view('user.aboutus',compact('about'));
+    }
 
-    function changepasswordpage(){
+    public function contact()
+    {
+        $contact = Contact::find(1);
+        return view('user.contact',compact('contact'));
+    }
+
+    function changepasswordpage()
+    {
         return view('user.changepassword');
     }
     // ChangePassword
-    function changepassword(Request $request){
+    function changepassword(Request $request)
+    {
         $this->ValidationCheck($request);
-        $id=Auth::user()->id;
-        $oldpassword=User::select('password')->where('id',$id)->first();
-        $oldpassword=$oldpassword->password;
-        if(Hash::check($request->oldpassword,$oldpassword)){
-            $data=[
-                'password' => Hash::make( $request->newpassword),
+        $id = Auth::user()->id;
+        $oldpassword = User::select('password')->where('id', $id)->first();
+        $oldpassword = $oldpassword->password;
+        if (Hash::check($request->oldpassword, $oldpassword)) {
+            $data = [
+                'password' => Hash::make($request->newpassword),
             ];
-            User::where('id',$id)->update($data);
+            User::where('id', $id)->update($data);
             Auth::guard('web')->logout();
             return redirect()->route('user.dashboard');
-        }else{
-           return back()->with(['doesnot' => 'You are oldpassword does not match!']);
+        } else {
+            return back()->with(['doesnot' => 'You are oldpassword does not match!']);
         }
     }
 
-
-
-    private function getData($request){
-        $data=[
+    private function getData($request)
+    {
+        $data = [
             'name' => $request->name,
-            'email'=> $request->email,
-            'phone'=> $request->phone,
-            'address'=> $request->address,
+            'email' => $request->email,
+            'phone' => $request->phone,
+            'address' => $request->address,
         ];
         return $data;
-
     }
 
-
-
-    private function ValidationCheck($request){
-        $validation=[
+    private function ValidationCheck($request)
+    {
+        $validation = [
             'oldpassword' => 'required|min:6|max:10',
-            'newpassword'=> 'required|min:6|max:10',
-            'comfirmpassword' => 'required|min:6|max:10|same:newpassword'
+            'newpassword' => 'required|min:6|max:10',
+            'comfirmpassword' => 'required|min:6|max:10|same:newpassword',
         ];
-        Validator::make($request->all(),$validation)->validate();
+        Validator::make($request->all(), $validation)->validate();
     }
 }

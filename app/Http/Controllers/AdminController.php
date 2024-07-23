@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Book;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Yajra\DataTables\DataTables;
 use App\Http\Controllers\Controller;
+use App\Models\Car;
+use App\Models\Company;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -41,14 +44,14 @@ class AdminController extends Controller
         return response()->json(['message' => 'User role changed successfully']);
     }
 
-    public function overallcount(){
 
-        return view('admin.total');
-    }
 
     public function index(){
-
-        return view('admin.dashboard');
+        $user = User::all()->count();
+        $book = Book::all()->count();
+        $brand = Company::all()->count();
+        $vehicle = Car::all()->count();
+        return view('admin.total',compact('user','book','brand','vehicle'));
     }
 
 
@@ -72,6 +75,14 @@ class AdminController extends Controller
         }else{
            return back()->with(['doesnot' => 'You are oldpassword does not match!']);
         }
+    }
+
+    public function overallcount(){
+        $user = User::all()->count();
+        $book = Book::all()->count();
+        $brand = Company::all()->count();
+        $vehicle = Car::all()->count();
+        return view('admin.total',compact('user','book','brand','vehicle'));
     }
 
 

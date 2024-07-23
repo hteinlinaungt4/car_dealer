@@ -37,11 +37,7 @@
           <div class="col-md-12">
 
               <h3 class="my-3">About Us</h3>
-              <p>Welcome to Customer! We are passionate about helping you find the perfect vehicle to suit your needs and budget. Since our establishment in 2001, we have been dedicated to providing exceptional customer service and a wide range of high-quality vehicles. Whether you’re looking for a new, certified pre-owned, or used car, our knowledgeable team is here to assist you every step of the way.
-
-                Dear, we believe in transparency, integrity, and customer satisfaction. Our extensive inventory features the latest models from top manufacturers as well as reliable pre-owned vehicles that have undergone rigorous inspections to ensure quality and safety. We strive to make your car-buying experience as seamless and enjoyable as possible.
-
-                Visit us today to explore our selection and discover why so many customers trust [Your Dealership Name] for their automotive needs. Your satisfaction is our top priority.</p>
+              <p>{{$about->description}}</p>
           </div>
         </div>
       </div>
@@ -49,3 +45,4 @@
 
 
 @endsection
+

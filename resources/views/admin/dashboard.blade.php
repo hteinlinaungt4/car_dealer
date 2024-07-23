@@ -39,7 +39,7 @@
         <ul class="navbar-nav bg-gradient-dark sidebar sidebar-dark accordion" id="accordionSidebar">
 
             <!-- Sidebar - Brand -->
-            <a href="" class="sidebar-brand d-flex align-items-center justify-content-center">
+            <a href="{{route('overallcount')}}" class="sidebar-brand d-flex align-items-center justify-content-center">
                 <div class="sidebar-brand-text mx-3">Car Dealer</div>
             </a>
             <!-- Divider -->
@@ -59,6 +59,13 @@
                     <span>Dashboard</span>
                 </a>
             </li> --}}
+
+            <li class="nav-item">
+                <a class="nav-link" href="{{route('overallcount')}}" >
+                    <i class="fa fa-dashboard"></i>
+                    <span>Dashboard</span>
+                </a>
+            </li>
 
             <!-- Nav Item - Charts -->
             <li class="nav-item">
@@ -104,8 +111,19 @@
                  </a>
             </li>
 
+            <li class="nav-item">
+                <a class="nav-link" href="{{route('admin.about')}}" >
+                    <i class="fa fa-bookmark"></i>
+                    <span>About Us</span>
+                 </a>
+            </li>
 
-
+            <li class="nav-item">
+                <a class="nav-link" href="{{route('admin.contact')}}" >
+                    <i class="fa fa-bookmark"></i>
+                    <span>Contact</span>
+                 </a>
+            </li>
 
             <!-- Divider -->
             <hr class="sidebar-divider d-none d-md-block">

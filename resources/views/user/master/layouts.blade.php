@@ -19,7 +19,11 @@
     <link rel="stylesheet" href="{{ asset('user/assets/css/fontawesome.css') }}">
     <link rel="stylesheet" href="{{ asset('user/assets/css/style.css') }}">
     <link rel="stylesheet" href="{{ asset('user/assets/css/owl.css') }}">
-
+    <style>
+        .red-star {
+            color: red;
+        }
+    </style>
 </head>
 
 <body>
@@ -28,7 +32,7 @@
         <nav class="navbar navbar-expand-lg">
             <div class="container">
                 <a class="navbar-brand" href="{{ route('user.dashboard') }}">
-                    <h2>Car <em>Dealer</em></h2>
+                    <h2> <em>Tokyo</em>  Car <em>Dealer</em></h2>
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
                     aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
@@ -40,6 +44,7 @@
                             <a class="nav-link" href="{{ route('user.dashboard') }}">Home
                             </a>
                         </li>
+                        <li class="nav-item"><a class="nav-link" href="{{route('user.carlist')}}">All Cars</a></li>
                         <li class="nav-item"><a class="nav-link" href="{{ route('about') }}">About</a></li>
                         <li class="nav-item"><a class="nav-link" href="{{ route('contact') }}">Contact</a></li>
                         <li class="nav-item"><a class="nav-link" href="{{route('car.interest')}}">Most Interest Cars</a></li>
@@ -49,11 +54,11 @@
                                 <a class="nav-link" href="{{ route('login') }}"><i class="fa fa-user-circle"
                                         aria-hidden="true"></i> Login</a>
                             </li>
-                            <li class="nav-item">
+                            {{-- <li class="nav-item">
                                 <a class="nav-link" href="{{ route('register') }}"><i class="fa fa-user-circle"
                                         aria-hidden="true"></i> Register
                                 </a>
-                            </li>
+                            </li> --}}
                         @else
                             <li class="dropdown nav-item"> <a href="#" class="nav-link" data-toggle="dropdown"
                                     aria-haspopup="true" aria-expanded="false"><i class="fa fa-user-circle"
@@ -62,6 +67,7 @@
                                     <i class="fa fa-angle-down" aria-hidden="true"></i></a>
                                 <ul class="dropdown-menu">
                                     <li class="nav-item"><a class="nav-link" href="{{route('userpassword#changepage')}}">Password Update</a></li>
+                                    <li class="nav-item"><a class="nav-link" href="{{route('fav')}}">Favourite Lists</a></li>
                                     <li class="nav-item">
                                         <form class="nav-link" method="POST" action="{{ route('logout') }}">
                                             @csrf
@@ -111,6 +117,7 @@
     <!-- Additional Scripts -->
     <script src="{{ asset('user/assets/js/custom.js') }}"></script>
     <script src="{{ asset('user/assets/js/owl.js') }}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     @yield('script')
 </body>

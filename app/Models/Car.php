@@ -15,48 +15,25 @@ class Car extends Model
     protected $fillable = [
         'name',
         'model',
-        'featured_image',
         'image1',
         'image2',
         'image3',
         'image4',
+        'image5',
         'type',
         'body_color',
-        'body_type',
         'company_id',
         'price',
         'number',
-        'length',
-        'width',
-        'height',
-        'seating_capacity',
         'fuel_type',
-        'displacement',
-        'max_power',
-        'max_torque',
         'mileage',
         'transmission',
-        'no_of_gears',
-        'air_conditioning',
-        'power_windows',
-        'central_locking',
-        'abs',
-        'air_bags',
-        'front_tire',
-        'rear_tire',
-        'description',
-        'fuel_capacity',
-        'boot_space',
-        'fog_lamps',
-        'engine_display',
-        'make_year',
-        'registration_year',
         'no_of_owners',
-        'insurance_type',
-        'rto',
-        'km_driven',
+        'description',
+        'max_power',
+        'position',
+        'view',
         'order',
-        'view'
     ];
 
 
@@ -68,6 +45,13 @@ class Car extends Model
     public function books()
     {
         return $this->hasMany(Book::class);
+    }
+
+
+
+    public function users()
+    {
+        return $this->belongsToMany(User::class);
     }
 
 }

@@ -45,7 +45,7 @@
                                             <h6>Price</h6>
                                             <p>{{$f->price}} MMK</p>
                                         </div>
-                                        <button data-id="{{$f->id}}" class="btn btn-danger btn-sm mt-3 delete_btn">Cancel Book</button>
+                                        <button data-id="{{$f->id}}" class="btn btn-danger btn-sm mt-3 delete_btn">Remove Favourite</button>
                                     </div>
                                 </div>
                             </div>

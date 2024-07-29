@@ -31,21 +31,24 @@
                             <div class="card-body">
                                 <div class="row">
                                     <div class="col-md-4">
-                                        <img class=" object-cover" width="100%" height="200px"
-                                            src="{{ asset('storage/cars/' . $f->image1) }}" alt="img">
+                                        <a href="{{ route('car.detail', $f->id) }}">
+                                            <img class=" object-cover" width="100%" height="200px"
+                                                src="{{ asset('storage/cars/' . $f->image1) }}" alt="img">
+                                        </a>
                                     </div>
                                     <div class="col-md-8">
                                         <div class="left-content">
                                             <h6>Model</h6>
-                                            <p>{{$f->name}}</p>
+                                            <p>{{ $f->name }}</p>
                                             <h6>Color</h6>
-                                            <p>{{$f->body_color}}</p>
+                                            <p>{{ $f->body_color }}</p>
                                             <h6>Position</h6>
-                                            <p>{{$f->position}}</p>
+                                            <p>{{ $f->position }}</p>
                                             <h6>Price</h6>
-                                            <p>{{$f->price}} MMK</p>
+                                            <p>{{ $f->price }} MMK</p>
                                         </div>
-                                        <button data-id="{{$f->id}}" class="btn btn-danger btn-sm mt-3 delete_btn">Remove Favourite</button>
+                                        <button data-id="{{ $f->id }}"
+                                            class="btn btn-danger btn-sm mt-3 delete_btn">Remove Favourite</button>
                                     </div>
                                 </div>
                             </div>
@@ -59,34 +62,34 @@
 
 @section('script')
     <script>
-         $(document).on('click','.delete_btn', function(e) {
-                e.preventDefault();
-                var id= $(this).data('id');
-                Swal.fire({
-                    title: 'Are you sure you want to Cancel Book?',
-                    icon: 'warning',
-                    showCancelButton: true,
-                    confirmButtonColor: '#3085d6',
-                    cancelButtonColor: '#d33',
-                    confirmButtonText: 'Yes'
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        $.ajax({
-                        method: "GET",
-                        url:  `favdelete/${id}`,
+        $(document).on('click', '.delete_btn', function(e) {
+            e.preventDefault();
+            var id = $(this).data('id');
+            Swal.fire({
+                title: 'Are you sure you want to Cancel Book?',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $.ajax({
+                            method: "GET",
+                            url: `favdelete/${id}`,
                         })
-                        .done(function( msg ) {
+                        .done(function(msg) {
                             Swal.fire(
-                            'Canceled!',
-                            'Your are successfully Cancel Book.',
-                            'success'
-                        ).then(() => {
-                            location.reload(); // Reload the page
-                        });
+                                'Canceled!',
+                                'Your are successfully Cancel Book.',
+                                'success'
+                            ).then(() => {
+                                location.reload(); // Reload the page
+                            });
                         });
 
-                    }
-                })
+                }
             })
+        })
     </script>
 @endsection

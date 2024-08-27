@@ -24,7 +24,7 @@ class UserController extends Controller
         $company = Company::all();
         $cars = Car::with('company')
             ->where('view', '>', 0) // Filter out records with 0 views
-            ->where('status','1') // Add the condition to filter by status = 1
+            ->where('status','0') // Add the condition to filter by status = 1
             ->orderBy('view') // Order by the 'view' attribute
             ->take(3) // Take the top 10 records
             ->get();
@@ -46,7 +46,7 @@ class UserController extends Controller
     public function fav()
     {
         $user = Auth::user();
-        $fav = $user->cars;
+        $fav = $user->cars->where('status',0);
         return view('user.fav', compact('fav'));
     }
 

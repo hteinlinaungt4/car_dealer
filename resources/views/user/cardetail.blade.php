@@ -97,13 +97,6 @@
                             </li>
                             <li class="list-group-item">
                                 <div class="clearfix">
-                                    <span class="pull-left">Car Model</span>
-
-                                    <strong class="pull-right">{{$car->model}}</strong>
-                                </div>
-                            </li>
-                            <li class="list-group-item">
-                                <div class="clearfix">
                                     <span class="pull-left">No of owner</span>
 
                                     <strong class="pull-right">{{$car->no_of_owners}}</strong>

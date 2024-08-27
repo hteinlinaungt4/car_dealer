@@ -118,10 +118,10 @@
                                                 </div>
                                             @endif
                                             <a href="">
-                                                <h4>{{ $c->name }} {{ $c->model }}</h4>
+                                                <h4>{{$c->company->name}} {{ $c->name }} {{ $c->model }}</h4>
                                             </a>
 
-                                            <h6> {{ $c->price }} MMK</h6>
+                                            <h6> {{ $c->price }} (Lakh)</h6>
 
 
                                             <small>

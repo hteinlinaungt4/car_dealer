@@ -148,7 +148,7 @@
 
 
                                 <div class="form-group">
-                                    <label class="col-sm-2 control-label">KM</label>
+                                    <label class="col-sm-2 control-label">Kilometers</label>
                                     <div class="col-sm-10">
                                         <input class="form-control" id="cmilage" name="mileage" type="text" required>
                                     </div>

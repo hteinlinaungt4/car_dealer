@@ -157,6 +157,7 @@
                                             <option value="Diesel" @if($car->fuel_type == "Diesel") selected @endif>Diesel</option>
                                             <option value="Petrol" @if($car->fuel_type == "Petrol") selected @endif>Petrol</option>
                                             <option value="Hybrid" @if($car->fuel_type == "Hybrid") selected @endif>Hybrid</option>
+                                            <option value="Ev" @if($car->fuel_type == "Ev") selected @endif>EV</option>
                                         </select>
                                     </div>
                                 </div>

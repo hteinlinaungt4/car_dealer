@@ -148,7 +148,7 @@
                             </li>
                             <li class="list-group-item">
                                 <div class="clearfix">
-                                    <span class="pull-left">KM</span>
+                                    <span class="pull-left">Kilometers</span>
 
                                     <strong class="pull-right">{{$car->mileage}}</strong>
                                 </div>

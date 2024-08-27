@@ -22,11 +22,12 @@ class UserController extends Controller
     public function index()
     {
         $company = Company::all();
+
+
         $cars = Car::with('company')
-            ->where('view', '>', 0) // Filter out records with 0 views
-            ->where('status','0') // Add the condition to filter by status = 1
-            ->orderBy('view') // Order by the 'view' attribute
-            ->take(3) // Take the top 10 records
+            ->where('view', '>', 0)  // Filter out records with 0 views
+            ->orderBy('view')        // Order by the 'view' attribute
+            ->take(3)               // Take the top 10 records
             ->get();
 
         $bestsellmodel = Car::where('status', '1') // Only sold-out cars
@@ -35,7 +36,7 @@ class UserController extends Controller
             ->orderByRaw('COUNT(*) DESC') // Order by total sales dynamically
             ->take(12)
             ->get(); // Retrieve the results
-        return view('user.dashboard', compact('company', 'cars','bestsellmodel'));
+        return view('user.dashboard', compact('company', 'cars', 'bestsellmodel'));
     }
 
     public function myprofile()
@@ -46,7 +47,7 @@ class UserController extends Controller
     public function fav()
     {
         $user = Auth::user();
-        $fav = $user->cars->where('status',0);
+        $fav = $user->cars->where('status', 0);
         return view('user.fav', compact('fav'));
     }
 
@@ -95,14 +96,14 @@ class UserController extends Controller
 
     public function addfav($id)
     {
-        $car=Car::findorFail($id);
+        $car = Car::findorFail($id);
         $user = Auth::user();
 
-        if (!$user->cars()->where('car_id',$car->id)->exists()) {
+        if (!$user->cars()->where('car_id', $car->id)->exists()) {
             $user->cars()->attach($car);
         }
 
-        $data=[
+        $data = [
             'msg' => 'Success',
         ];
         return response()->json($data, 200);
@@ -110,14 +111,14 @@ class UserController extends Controller
 
     public function about()
     {
-        $about=About::find(1);
-        return view('user.aboutus',compact('about'));
+        $about = About::find(1);
+        return view('user.aboutus', compact('about'));
     }
 
     public function contact()
     {
         $contact = Contact::find(1);
-        return view('user.contact',compact('contact'));
+        return view('user.contact', compact('contact'));
     }
 
     function changepasswordpage()

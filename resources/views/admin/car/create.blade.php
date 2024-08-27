@@ -141,6 +141,7 @@
                                             <option value="Diesel">Diesel</option>
                                             <option value="Petrol">Petrol</option>
                                             <option value="Hybrid">Hybrid</option>
+                                            <option value="Ev">EV</option>
                                         </select>
                                     </div>
                                 </div>

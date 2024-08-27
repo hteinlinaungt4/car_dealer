@@ -10,18 +10,6 @@
                     <h2>Preowned Car Selling Portal</h2>
                 </div>
             </div>
-            <div class="banner-item-02">
-                <div class="text-content">
-                    <h4>Find the Right car in your budget</h4>
-                    <h2>Preowned Car Selling Portal</h2>
-                </div>
-            </div>
-            <div class="banner-item-03">
-                <div class="text-content">
-                    <h4>FIND THE RIGHT CAR</h4>
-                    <h2>Preowned Car Selling Portal</h2>
-                </div>
-            </div>
         </div>
     </div>
     <div class="services section-background">
@@ -63,11 +51,9 @@
                                 @foreach ($cars as $c)
                                     <div class="col-md-4">
                                         <div class="product-item">
-                                            <a href="{{route('car.detail',$c->id)}}"><img src="{{asset('storage/cars/'.$c->image1)}}" height="250" class=" object-cover"></a>
+                                            <img src="{{asset('storage/cars/'.$c->image1)}}" height="250" class=" object-cover">
                                             <div class="down-content">
-                                                <a href="">
                                                     <h4>{{$c->name}} {{$c->model}}</h4>
-                                                </a>
 
                                                 <h6> {{$c->price}} MMK</h6>
 
@@ -98,53 +84,16 @@
         @endif
 
 
-
-        @if(count($car) != 0)
         <div class="container">
-            <h3 class="mt-5">Best Sell Cars</h3>
-            <div class="products">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="row">
-                                @foreach ($car as $c)
-                                    <div class="col-md-4">
-                                        <div class="product-item">
-                                            <a href="{{route('car.detail',$c->id)}}"><img src="{{asset('storage/cars/'.$c->image1)}}" height="250" class=" object-cover"></a>
-                                            <div class="down-content">
-                                                <a href="">
-                                                    <h4>{{$c->name}} {{$c->model}}</h4>
-                                                </a>
-
-                                                <h6> {{$c->price}} MMK</h6>
-
-
-                                                <small>
-                                                    <strong title="Author"><i class="fa fa-code-fork" aria-hidden="true"></i>
-                                                        {{$c->transmission}}</strong>
-                                                    &nbsp;&nbsp;
-                                                    <strong title="Author"><i class="fa fa-street-view" aria-hidden="true"></i>
-                                                        {{$c->position}}</strong>&nbsp;&nbsp;
-                                                    <strong title="Views"><i class="fa fa-fire" aria-hidden="true"></i>{{$c->fuel_type}}</strong>
-                                                </small>
-                                            </div>
-                                        </div>
-                                    </div>
-                                @endforeach
-
-
-                            </div>
-                            <div class="float-right mb-3">
-                                <a href="{{route('car.bestsell')}}" class="btn btn-danger btn-sm" >See More Best Sell Car</a>
-                            </div>
-                        </div>
+            <h3 class="my-5">Most Best Sell Model</h3>
+            <div class="row mx-auto">
+                @foreach ($bestsellmodel as $b)
+                    <div class="col-md-4 py-3">
+                      <a href="{{route('car.bestsellcar',$b->name)}}">{{$b['name']}}</a>
                     </div>
-                </div>
+                @endforeach
             </div>
         </div>
-        @else
-        <h3 style="color: red;" class="text-center my-5">Today, we do not have the best-seller list</h3>
-        @endif
     </div>
 
 @endsection

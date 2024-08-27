@@ -21,7 +21,6 @@ return new class extends Migration
             $table->enum('status',['0','1'])->default('0');
             $table->timestamps();
             $table->foreign('car_id')->references('id')->on('cars')->onDelete('cascade');
-
         });
     }
 

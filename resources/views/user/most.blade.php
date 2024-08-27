@@ -27,9 +27,9 @@
                             @foreach ($cars as $c)
                                 <div class="col-md-4">
                                     <div class="product-item">
-                                        <a href="{{ route('car.detail', $c->id) }}"><img
+                                        <img
                                                 src="{{ asset('storage/cars/' . $c->image1) }}" height="250"
-                                                class=" object-cover"></a>
+                                                class=" object-cover">
                                         <div class="down-content">
                                             @if (Auth::check())
                                                 <div>
@@ -45,12 +45,9 @@
                                                     @endif
                                                 </div>
                                             @endif
-                                            <a href="">
                                                 <h4>{{ $c->name }} {{ $c->model }}</h4>
-                                            </a>
 
-                                            <h6> {{ $c->price }} MMK</h6>
-
+                                            <h6> {{ $c->price }} MMK (lkah)</h6>
 
                                             <small>
                                                 <strong title="Author"><i class="fa fa-code-fork" aria-hidden="true"></i>

@@ -32,7 +32,7 @@ return new class extends Migration {
             $table->string('max_power');
             $table->string('position');
             $table->integer('view')->default(0);
-            $table->integer('order')->default(0);
+            $table->enum('status',['0','1'])->default('0');
             $table->timestamps();
         });
     }
@@ -45,3 +45,8 @@ return new class extends Migration {
         Schema::dropIfExists('cars');
     }
 };
+
+
+
+
+

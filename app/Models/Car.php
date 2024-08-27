@@ -33,7 +33,8 @@ class Car extends Model
         'max_power',
         'position',
         'view',
-        'order',
+        'status',
+        'sales_count'
     ];
 
 
@@ -46,8 +47,6 @@ class Car extends Model
     {
         return $this->hasMany(Book::class);
     }
-
-
 
     public function users()
     {

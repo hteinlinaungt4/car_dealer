@@ -53,6 +53,10 @@
                         name: 'price'
                     },
                     {
+                        data: 'status',
+                        name: 'status'
+                    },
+                    {
                         data: 'actions',
                         name: 'actions',
                         class: 'text-center'

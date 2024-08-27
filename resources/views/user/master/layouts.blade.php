@@ -48,7 +48,6 @@
                         <li class="nav-item"><a class="nav-link" href="{{ route('about') }}">About</a></li>
                         <li class="nav-item"><a class="nav-link" href="{{ route('contact') }}">Contact</a></li>
                         <li class="nav-item"><a class="nav-link" href="{{route('car.interest')}}">Most Interest Cars</a></li>
-                        <li class="nav-item"><a class="nav-link" href="{{route('car.bestsell')}}">Best Sell Cars</a></li>
                         @if (!Auth::check())
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ route('login') }}"><i class="fa fa-user-circle"

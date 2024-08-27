@@ -22,14 +22,14 @@
                             <div class="panel-body">
                                 <!-- Form fields for the first column -->
                                 <div class="form-group">
-                                    <label class="col-sm-2 control-label">Car Name</label>
+                                    <label class="col-sm-2 control-label">Car Model</label>
                                     <div class="col-sm-10">
                                         <input value="{{$car->name}}" class="form-control" id="cname" name="name" type="text"  />
                                     </div>
                                 </div>
 
                                 <div class="form-group">
-                                    <label class="col-sm-2 control-label">Car Model</label>
+                                    <label class="col-sm-2 control-label">Year</label>
                                     <div class="col-sm-10">
                                         <input class="form-control" value="{{$car->model}}" id="cmodel" name="model" type="text" >
                                     </div>
@@ -154,19 +154,16 @@
                                     <div class="col-sm-10">
                                         <select name="fuel_type" class="form-control" >
                                             <option>Choose Type of Fuel</option>
-                                            <option value="Gasoline" @if($car->fuel_type == "Gasoline") selected @endif>Gasoline</option>
                                             <option value="Diesel" @if($car->fuel_type == "Diesel") selected @endif>Diesel</option>
-                                            <option value="Liquid Petroleum" @if($car->fuel_type == "Liquid Petroleum") selected @endif>Petrol</option>
-                                            <option value="Compressed Natural Gas" @if($car->fuel_type == "Compressed Natural Gas") selected @endif>Compressed Natural Gas(CNG)</option>
-                                            <option value="Ethanol" @if($car->fuel_type == "Ethanol") selected @endif>Ethanol</option>
-                                            <option value="Biodiesel" @if($car->fuel_type == "Biodiesel") selected @endif>Bio-Diesel</option>
+                                            <option value="Petrol" @if($car->fuel_type == "Petrol") selected @endif>Petrol</option>
+                                            <option value="Hybrid" @if($car->fuel_type == "Hybrid") selected @endif>Hybrid</option>
                                         </select>
                                     </div>
                                 </div>
 
 
                                 <div class="form-group">
-                                    <label class="col-sm-2 control-label">Mileage</label>
+                                    <label class="col-sm-2 control-label">KM</label>
                                     <div class="col-sm-10">
                                         <input class="form-control" value="{{$car->mileage}}" id="cmilage" name="mileage" type="text" required>
                                     </div>
@@ -177,8 +174,8 @@
                                     <div class="col-sm-10">
                                         <select name="transmission" class="form-control" >
                                             <option >Choose Transmission Type</option>
-                                            <option value="Manual transmission" @if($car->transmission == "Manual") selected @endif>Manual Transmission</option>
-                                            <option value="Automatic transmission" @if($car->transmission == "Auto") selected @endif>Automatic Transmission</option>
+                                            <option value="Manual" @if($car->transmission == "Manual") selected @endif>Manual</option>
+                                            <option value="Auto" @if($car->transmission == "Auto") selected @endif>Auto</option>
                                         </select>
                                     </div>
                                 </div>

@@ -6,7 +6,7 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="text-content">
-                        <h4> <strong class="text-primary"> {{$car->price}} MMK </strong></h4>
+                        <h4> <strong class="text-primary"> {{$car->price}} (Lakh) </strong></h4>
                         <h2>{{$car->name}}</h2>
                     </div>
                 </div>
@@ -68,7 +68,7 @@
 
                             <li class="list-group-item">
                                 <div class="clearfix">
-                                    <span class="pull-left">Car Name</span>
+                                    <span class="pull-left">Car Model</span>
 
                                     <strong class="pull-right">{{$car->name}}</strong>
                                 </div>
@@ -78,6 +78,13 @@
                                     <span class="pull-left">Car Company</span>
 
                                     <strong class="pull-right">{{$car->company->name}}</strong>
+                                </div>
+                            </li>
+                            <li class="list-group-item">
+                                <div class="clearfix">
+                                    <span class="pull-left">Year</span>
+
+                                    <strong class="pull-right">{{$car->model}}</strong>
                                 </div>
                             </li>
 
@@ -128,7 +135,7 @@
                                 <div class="clearfix">
                                     <span class="pull-left">Car Price</span>
 
-                                    <strong class="pull-right">{{$car->price}} MMK</strong>
+                                    <strong class="pull-right">{{$car->price}} (Lakh)</strong>
                                 </div>
                             </li>
 
@@ -141,7 +148,7 @@
                             </li>
                             <li class="list-group-item">
                                 <div class="clearfix">
-                                    <span class="pull-left">Mileage</span>
+                                    <span class="pull-left">KM</span>
 
                                     <strong class="pull-right">{{$car->mileage}}</strong>
                                 </div>
@@ -231,16 +238,16 @@
                         @csrf
                         <input type="hidden" name="car_id" value="{{$car->id}}">
                         <div class="form-group">
-                            <input class="form-control" type="text" name="name" required="true"
+                            <input class="form-control" value="{{Auth::user()->name}}" type="text" name="name" required="true"
                                 placeholder="Name" />
                         </div>
                         <div class="form-group">
                             <input class="form-control" type="email" name="email" required="true"
-                                placeholder="Email" />
+                                placeholder="Email" value="{{Auth::user()->email}}" />
                         </div>
                         <div class="form-group">
                             <input class="form-control" type="number" name="phone" maxlength="10" pattern="[0-9]+"
-                                placeholder="Mobile Number" required="true" />
+                                placeholder="Mobile Number" value="{{Auth::user()->phone}}" required="true" />
                         </div>
                         <div class="form-group">
                             <textarea class="form-control" name="message" placeholder="Message" required="true" rows="4"></textarea>

@@ -40,6 +40,7 @@ class BookController extends Controller
 
             return '<div class="d-flex justify-content-center">' . $statusButton . '</div>';
         })
+
         ->addColumn('created_at', function($each) {
             return $each->created_at->format('Y-m-d');
         })
@@ -50,7 +51,7 @@ class BookController extends Controller
     public function updateStatus(Request $request, $id)
     {
         $car=Car::findorFail($request->car_id);
-        $car->order = $car->order + 1;
+        $car->status = "1";
         $car->save();
 
         $book = Book::findOrFail($id);

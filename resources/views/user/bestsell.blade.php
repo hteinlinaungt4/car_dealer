@@ -1,5 +1,5 @@
 @extends('user.master.layouts')
-@section('title', 'Car Lists')
+@section('title', 'Best Sell Model')
 @section('content')
 
 
@@ -9,10 +9,20 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="text-content">
-                        <h4>Best Sell</h4>
+                        @if ($companyNames)
+                            <h4>{{$companyNames[0]}}</h4>
+                        @endif
                         <h2>Cars</h2>
                     </div>
                 </div>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="mt-5">
+                <i class="fa fa-home"></i> <a href="{{ route('user.dashboard') }}">Home</a> > <a
+                    onclick="window.history.back()">Best Sell Model</a>
             </div>
         </div>
     </div>
@@ -23,36 +33,30 @@
                 <div class="row">
                     <div class="col-md-12">
                         <div class="row">
-
                             @foreach ($cars as $c)
                                 <div class="col-md-4">
                                     <div class="product-item">
                                         <a href="{{ route('car.detail', $c->id) }}"><img
-                                                src="{{ asset('storage/cars/' . $c->image1) }}" height="250"></a>
+                                                src="{{ asset('storage/cars/' . $c->image1) }}" height="250"
+                                                class=" object-cover"></a>
                                         <div class="down-content">
                                             @if (Auth::check())
-                                                <div>
-                                                    @if (in_array($c->id, $favCars))
-                                                        <a href="#" class="float-right">
-                                                            <i class="fa fa-star red-star" aria-hidden="true"></i>
-                                                        </a>
-                                                    @else
-                                                        <a href="#" class="float-right add-fav-btn"
-                                                            data-id="{{ $c->id }}">
-                                                            <i class="fa fa-star-o" aria-hidden="true"></i>
-                                                        </a>
-                                                    @endif
-                                                </div>
-                                            @endif
-                                            <a href="">
-                                                <h4>{{ $c->name }}</h4>
-                                            </a>
-
+                                            <div>
+                                                @if (in_array($c->id, $favCars))
+                                                    <a href="#" class="float-right">
+                                                        <i class="fa fa-star red-star" aria-hidden="true"></i>
+                                                    </a>
+                                                @else
+                                                    <a href="#" class="float-right add-fav-btn"
+                                                        data-id="{{ $c->id }}">
+                                                        <i class="fa fa-star-o" aria-hidden="true"></i>
+                                                    </a>
+                                                @endif
+                                            </div>
+                                        @endif
+                                            <h4>{{ $c->name }} {{ $c->model }}</h4>
                                             <h6> {{ $c->price }} MMK</h6>
 
-                                            <p>{{ $c->max_power }} &nbsp;/&nbsp; {{ $c->fuel_type }} &nbsp;/&nbsp;
-                                                {{ $c->registration_year }} &nbsp;/&nbsp; Used vehicle
-                                            </p>
 
                                             <small>
                                                 <strong title="Author"><i class="fa fa-code-fork" aria-hidden="true"></i>
@@ -67,17 +71,13 @@
                                     </div>
                                 </div>
                             @endforeach
-
-
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     @else
-        <div style="min-height: 32vh;">
-            <h3 style="color: red;" class="text-center my-5">No Car Lists</h3>
-        </div>
+        <h3 style="color: red;" class="text-center my-5">No Car Lists</h3>
     @endif
 
 @endsection
@@ -94,7 +94,7 @@
                 .done(function(msg) {
                     button.replaceWith(
                         '<a class="float-right"><i class="fa fa-star red-star" aria-hidden="true"></i></a>'
-                    ); // Replace with full star icon
+                        ); // Replace with full star icon
                 });
         });
     </script>

@@ -10,10 +10,10 @@
                             <thead>
                                 <tr>
                                     <th>Car Name</th>
-                                    <th>Name</th>
-                                    <th>Email</th>
-                                    <th>Phone</th>
-                                    <th>Message</th>
+                                    <th>User Name</th>
+                                    <th>User Email</th>
+                                    <th>User Phone</th>
+                                    <th>User Message</th>
                                     <th>Posting Date</th>
                                     <th class="nosort">Actions</th>
                                 </tr>

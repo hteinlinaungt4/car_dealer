@@ -3,14 +3,15 @@
 namespace App\Http\Controllers;
 
 use App\Models\Car;
+use App\Models\About;
 use App\Models\Company;
+use App\Models\Contact;
+use Illuminate\Log\Logger;
 use Illuminate\Http\Request;
 use Yajra\DataTables\DataTables;
+use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
-use App\Models\About;
-use App\Models\Contact;
 use Illuminate\Foundation\Auth\User;
-use Illuminate\Log\Logger;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -23,15 +24,18 @@ class UserController extends Controller
         $company = Company::all();
         $cars = Car::with('company')
             ->where('view', '>', 0) // Filter out records with 0 views
+            ->where('status','1') // Add the condition to filter by status = 1
             ->orderBy('view') // Order by the 'view' attribute
             ->take(3) // Take the top 10 records
             ->get();
-        $car = Car::with('company')
-            ->where('order', '>', 0) // Filter out records with 0 views
-            ->orderBy('order') // Order by the 'view' attribute
-            ->take(3) // Take the top 10 records
-            ->get();
-        return view('user.dashboard', compact('company', 'cars', 'car'));
+
+        $bestsellmodel = Car::where('status', '1') // Only sold-out cars
+            ->select('name') // Select name and count sold-out cars dynamically
+            ->groupBy('name') // Group by name
+            ->orderByRaw('COUNT(*) DESC') // Order by total sales dynamically
+            ->take(12)
+            ->get(); // Retrieve the results
+        return view('user.dashboard', compact('company', 'cars','bestsellmodel'));
     }
 
     public function myprofile()
@@ -93,9 +97,11 @@ class UserController extends Controller
     {
         $car=Car::findorFail($id);
         $user = Auth::user();
-        if (!$user->cars()->where('car_id', $car->id)->exists()) {
+
+        if (!$user->cars()->where('car_id',$car->id)->exists()) {
             $user->cars()->attach($car);
         }
+
         $data=[
             'msg' => 'Success',
         ];

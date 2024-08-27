@@ -7,9 +7,11 @@ use App\Models\Company;
 use Illuminate\Log\Logger;
 use Illuminate\Http\Request;
 use Yajra\DataTables\DataTables;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
+use PhpOffice\PhpSpreadsheet\Writer\Xlsx\Rels;
 
 class CarController extends Controller
 {
@@ -21,26 +23,43 @@ class CarController extends Controller
         return view('admin.car.index');
     }
 
-    public function ssd(){
-        $car=Car::with('company');
+    public function ssd()
+    {
+        $car = Car::with('company');
         return DataTables::of($car)
-        ->filterColumn('company',function($query,$keyword){
-            $query->whereHas('company',function($q1) use ($keyword){
-                $q1->where('name','like','%'.$keyword.'%');
-            });
-        })
-        ->addColumn('company', function($each) {
-            return $each->company->name;
-        })
-        ->addColumn('actions',function($each){
-            $edit = '<a href="'.route('car.edit',$each->id).'" class="text-primary shadow p-2"><i class="fa-regular fa-pen-to-square p-1 fw-bold"></i></a>';
-            $delete='<a href="#" class=" delete_btn text-danger shadow  p-2" data-id="'.$each->id.'" ><i class="fa-solid fa-trash p-1 fw-bold"></i></a>';
-            return '<div class="d-flex justify-content-center">'.
-                    $edit.$delete
-                    .'</div>';
-        })
-        ->rawColumns(['actions','image'])
-        ->make(true);
+            ->filterColumn('company', function ($query, $keyword) {
+                $query->whereHas('company', function ($q1) use ($keyword) {
+                    $q1->where('name', 'like', '%' . $keyword . '%');
+                });
+            })
+
+            ->addColumn('company', function ($each) {
+                return $each->company->name;
+            })
+            ->addColumn('actions', function ($each) {
+                $edit = '<a href="' . route('car.edit', $each->id) . '" class="text-primary shadow p-2"><i class="fa-regular fa-pen-to-square p-1 fw-bold"></i></a>';
+                $delete = '<a href="#" class=" delete_btn text-danger shadow  p-2" data-id="' . $each->id . '" ><i class="fa-solid fa-trash p-1 fw-bold"></i></a>';
+                return '<div class="d-flex justify-content-center">' .
+                    $edit . $delete
+                    . '</div>';
+            })
+            ->editColumn('status', function ($each) {
+                $stock = ($each->status == "0") ? '<span class="badge rounded-pill bg-success p-3 text-white">For Sell</span>' : '<span class="badge rounded-pill bg-danger p-3 text-white">Sold Out</span>';
+                return $stock;
+            })
+            ->filterColumn('status', function ($query, $keyword) {
+                $keyword = strtolower(trim($keyword));
+
+                if (strpos($keyword, 'for sell') !== false || strpos($keyword, 'sell') !== false) {
+                    $query->where('status', '0');
+                } elseif (strpos($keyword, 'sold out') !== false || strpos($keyword, 'sold') !== false) {
+                    $query->where('status', '1');
+                }
+            })
+
+
+            ->rawColumns(['actions', 'image', 'status'])
+            ->make(true);
     }
     /**
      * Show the form for creating a new resource.
@@ -130,9 +149,9 @@ class CarController extends Controller
      */
     public function edit(string $id)
     {
-        $company=Company::all();
-        $car=Car::findorFail($id);
-        return view('admin.car.edit',compact('car','company'));
+        $company = Company::all();
+        $car = Car::findorFail($id);
+        return view('admin.car.edit', compact('car', 'company'));
     }
 
     /**
@@ -207,7 +226,6 @@ class CarController extends Controller
         return redirect()
             ->route('car.index')
             ->with(['successmsg' => 'Car created successfully!']);
-
     }
 
     /**
@@ -227,7 +245,7 @@ class CarController extends Controller
         // Delete the vehicle record from the database
         $car->delete();
 
-        $data=[
+        $data = [
             'msg' => 'success',
         ];
         return response()->json($data, 200);
@@ -238,118 +256,137 @@ class CarController extends Controller
     {
         $user = Auth::user();
         $favCars = $user->cars->pluck('id')->toArray();
-        $company=Company::where('id',$id)->first();
-        $cars=Car::with('company')->where('company_id',$id)->get();
-        return view('user.detail',compact('cars','company','favCars'));
+        $company = Company::where('id', $id)->first();
+        $cars = Car::with('company')->where('company_id', $id)->where('status','0')->get();
+        return view('user.detail', compact('cars', 'company', 'favCars'));
     }
 
-    public function detail($id){
-        $car=Car::with('company')->findorFail($id);
+    public function detail($id)
+    {
+        $car = Car::with('company')->findorFail($id);
         $car->view = $car->view + 1;
         $car->update();
-        return view('user.cardetail',compact('car'));
+        return view('user.cardetail', compact('car'));
     }
 
 
     public function mostinterest()
     {
         $cars = Car::with('company')
-        ->where('view', '>', 0)  // Filter out records with 0 views
-        ->orderBy('view')        // Order by the 'view' attribute
-        ->take(10)               // Take the top 10 records
-        ->get();
+            ->where('view', '>', 0)  // Filter out records with 0 views
+            ->orderBy('view')        // Order by the 'view' attribute
+            ->take(10)               // Take the top 10 records
+            ->get();
         $user = Auth::user();
-        if($user){
+        if ($user) {
             $favCars = $user->cars->pluck('id')->toArray();
-            return view('user.most',compact('cars','favCars'));
+            return view('user.most', compact('cars', 'favCars'));
         }
-        return view('user.most',compact('cars'));
-
+        return view('user.most', compact('cars'));
     }
 
-    public function bestsell()
+    public function most()
     {
-        $cars = Car::with('company')
-        ->where('order', '>', 0)  // Filter out records with 0 views
-        ->orderBy('order')        // Order by the 'view' attribute
-        ->take(10)               // Take the top 10 records
-        ->get();
-        $user = Auth::user();
-        if($user){
-            $favCars = $user->cars->pluck('id')->toArray();
-            return view('user.bestsell',compact('cars','favCars'));
-        }
-        return view('user.bestsell',compact('cars'));
-
-    }
-
-
-
-
-    public function most(){
         return view('admin.Most Interest.index');
     }
 
-    public function best(){
+    public function best()
+    {
         return view('admin.Best Sell.index');
     }
 
 
-    public function mostssd() {
+    public function mostssd()
+    {
         $car = Car::with('company')
             ->where('view', '>', 0)
             ->orderBy('view');
         return DataTables::of($car)
-            ->filterColumn('company', function($query, $keyword) {
-                $query->whereHas('company', function($q1) use ($keyword) {
+            ->filterColumn('company', function ($query, $keyword) {
+                $query->whereHas('company', function ($q1) use ($keyword) {
                     $q1->where('name', 'like', '%' . $keyword . '%');
                 });
             })
-            ->addColumn('image', function($each) {
+            ->addColumn('image', function ($each) {
                 return '<img style="width:100px;height:100px;" class="object-cover" src="' . asset('storage/cars/' . $each->image1) . '" />';
             })
-            ->addColumn('company', function($each) {
+            ->addColumn('company', function ($each) {
                 return $each->company->name;
             })
             ->rawColumns(['image'])
             ->make(true);
     }
 
-    public function bestssd() {
-        $car = Car::with('company')
-            ->where('order', '>', 0)
-            ->orderBy('order');
-        return DataTables::of($car)
-            ->filterColumn('company', function($query, $keyword) {
-                $query->whereHas('company', function($q1) use ($keyword) {
-                    $q1->where('name', 'like', '%' . $keyword . '%');
-                });
-            })
-            ->addColumn('image', function($each) {
-                return '<img style="width:100px;height:100px;" class="object-cover" src="' . asset('storage/cars/' . $each->image1) . '" />';
-            })
-            ->addColumn('company', function($each) {
-                return $each->company->name;
-            })
-            ->rawColumns(['image'])
+    // public function bestssd() {
+    //     $car = Car::with('company')
+    //         ->where('status', '1');
+    //     return DataTables::of($car)
+    //         ->filterColumn('company', function($query, $keyword) {
+    //             $query->whereHas('company', function($q1) use ($keyword) {
+    //                 $q1->where('name', 'like', '%' . $keyword . '%');
+    //             });
+    //         })
+    //         ->addColumn('image', function($each) {
+    //             return '<img style="width:100px;height:100px;" class="object-cover" src="' . asset('storage/cars/' . $each->image1) . '" />';
+    //         })
+    //         ->addColumn('company', function($each) {
+    //             return $each->company->name;
+    //         })
+    //         ->rawColumns(['image'])
+    //         ->make(true);
+    // }
+
+    public function bestssd()
+    {
+        // Step 1: Group by car name and count the total number of sold-out cars for each name
+        $bestSellingCars = Car::where('status', '1') // Only sold-out cars
+            ->select('name', DB::raw('COUNT(*) as total_sales')) // Select name and count sold-out cars dynamically
+            ->groupBy('name') // Group by name
+            ->orderByRaw('COUNT(*) DESC') // Order by total sales dynamically
+            ->get(); // Retrieve the results
+
+        // Step 2: Map the data for DataTables
+        $data = $bestSellingCars->map(function ($carGroup) {
+            // Find the first car with this name to get the company name
+            $car = Car::where('name', $carGroup->name)->first();
+
+            return [
+                'name' => $carGroup->name,
+                'company' => $car->company->name ?? 'No Company', // Get the company name
+                'total_sales' => $carGroup->total_sales, // Include the dynamically calculated total sales count
+            ];
+        });
+
+        // Step 3: Return DataTables response
+        return DataTables::of($data)
             ->make(true);
     }
 
-    public function usercarlist(){
-        $cars=Car::all();
+
+
+
+
+    public function usercarlist()
+    {
+        $companies = Company::select('name', 'id')->get();
+        $models = Car::select('name')->distinct()->pluck('name');
+        $colors = Car::select('body_color')->distinct()->pluck('body_color');
+
+        $cars = Car::where('status',"0")->get();
         $user = Auth::user();
-        if($user){
+        if ($user) {
             $favCars = $user->cars->pluck('id')->toArray();
-            return view('user.car',compact('cars','favCars'));
+            return view('user.car', compact('cars', 'favCars', 'companies', 'models', 'colors'));
         }
-        return view('user.car',compact('cars'));
-
+        return view('user.car', compact('cars', 'companies', 'models', 'colors'));
     }
 
-    public function search(Request $request){
+    public function search(Request $request)
+    {
         $query = $request->key;
 
         $car = Car::where('name', 'LIKE', "%{$query}%")
+            ->where('status',"0")
             ->orWhere('model', 'LIKE', "%{$query}%")
             ->orWhere('type', 'LIKE', "%{$query}%")
             ->orWhere('body_color', 'LIKE', "%{$query}%")
@@ -362,7 +399,56 @@ class CarController extends Controller
         return response()->json($car);
     }
 
+    public function carsearch(Request $request)
+    {
+        // $query = Car::query();
+        $query = Car::where('status',"0");
 
 
+        if ($request->filled('brand')) {
+            $query->where('company_id', 'like', '%' . $request->brand . '%');
+        }
 
+        if ($request->filled('model')) {
+            $query->where('name', 'like', '%' . $request->model . '%');
+        }
+
+        if ($request->filled('min_price')) {
+            $query->where('price', '>=', $request->min_price);
+        }
+
+        if ($request->filled('max_price')) {
+            $query->where('price', '<=', $request->max_price);
+        }
+
+        if ($request->filled('color')) {
+            $query->where('body_color', 'like', '%' . $request->color . '%');
+        }
+
+        $cars = $query->get();
+
+        $data = [
+            'msg' => 'success',
+            'cars' => $cars,
+        ];
+
+        $user = Auth::user();
+        if ($user) {
+            $favCars = $user->cars->pluck('id')->toArray();
+            $data['favCars'] = $favCars;  // Add favCars to the existing data array
+        }
+
+        return response()->json($data, 200);
+    }
+
+    public function bestsellcar($name){
+        $user = Auth::user();
+        $cars = Car::where('name', $name)->where('status','0')->get();
+        $companyNames = $cars->pluck('company.name')->toArray();
+        if ($user) {
+            $favCars = $user->cars->pluck('id')->toArray();
+            return view('user.bestsell', compact('cars','favCars','companyNames'));
+        }
+        return view('user.bestsell', compact('cars','companyNames'));
+    }
 }

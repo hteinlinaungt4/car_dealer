@@ -21,14 +21,14 @@
                             <div class="panel-body">
                                 <!-- Form fields for the first column -->
                                 <div class="form-group">
-                                    <label class="col-sm-2 control-label">Car Name</label>
+                                    <label class="col-sm-2 control-label">Car Model</label>
                                     <div class="col-sm-10">
                                         <input class="form-control" id="cname" name="name" type="text" required />
                                     </div>
                                 </div>
 
                                 <div class="form-group">
-                                    <label class="col-sm-2 control-label">Car Model</label>
+                                    <label class="col-sm-2 control-label">Year</label>
                                     <div class="col-sm-10">
                                         <input class="form-control" id="cmodel" name="model" type="text" required>
                                     </div>
@@ -133,29 +133,21 @@
                                     </div>
                                 </div>
 
-
-
-
-
-
                                 <div class="form-group">
                                     <label class="col-sm-2 control-label">Fuel Type</label>
                                     <div class="col-sm-10">
                                         <select name="fuel_type" class="form-control" required>
                                             <option>Choose Type of Fuel</option>
-                                            <option value="Gasoline">Gasoline</option>
                                             <option value="Diesel">Diesel</option>
-                                            <option value="Liquid Petroleum">Petrol</option>
-                                            <option value="Compressed Natural Gas">Compressed Natural Gas(CNG)</option>
-                                            <option value="Ethanol">Ethanol</option>
-                                            <option value="Biodiesel">Bio-Diesel</option>
+                                            <option value="Petrol">Petrol</option>
+                                            <option value="Hybrid">Hybrid</option>
                                         </select>
                                     </div>
                                 </div>
 
 
                                 <div class="form-group">
-                                    <label class="col-sm-2 control-label">Mileage</label>
+                                    <label class="col-sm-2 control-label">KM</label>
                                     <div class="col-sm-10">
                                         <input class="form-control" id="cmilage" name="mileage" type="text" required>
                                     </div>
@@ -166,8 +158,8 @@
                                     <div class="col-sm-10">
                                         <select name="transmission" class="form-control" required>
                                             <option >Choose Transmission Type</option>
-                                            <option value="Manual">Manual Transmission</option>
-                                            <option value="Auto">Automatic Transmission</option>
+                                            <option value="Manual">Manual</option>
+                                            <option value="Auto">Auto</option>
                                         </select>
                                     </div>
                                 </div>
@@ -178,9 +170,6 @@
                                         <input class="form-control" id="cmpower" name="max_power" type="text" required>
                                     </div>
                                 </div>
-
-
-
                                 <div class="form-group">
                                     <label class="col-sm-2 control-label">Car Description</label>
                                     <div class="col-sm-10">

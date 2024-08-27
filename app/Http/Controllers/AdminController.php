@@ -51,7 +51,9 @@ class AdminController extends Controller
         $book = Book::all()->count();
         $brand = Company::all()->count();
         $vehicle = Car::all()->count();
-        return view('admin.total',compact('user','book','brand','vehicle'));
+        $sellcars = Car::where('status','0')->get()->count();
+        $soldcars = Car::where('status','1')->get()->count();
+        return view('admin.total',compact('user','book','brand','vehicle','sellcars','soldcars'));
     }
 
 
@@ -82,7 +84,9 @@ class AdminController extends Controller
         $book = Book::all()->count();
         $brand = Company::all()->count();
         $vehicle = Car::all()->count();
-        return view('admin.total',compact('user','book','brand','vehicle'));
+        $soldcars = Car::where('status','1')->get()->count();
+        $sellcars = Car::where('status','0')->get()->count();
+        return view('admin.total',compact('user','book','brand','vehicle','sellcars','soldcars'));
     }
 
 

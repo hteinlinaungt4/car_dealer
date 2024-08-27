@@ -86,8 +86,6 @@ Route::middleware(['auth:sanctum',config('jetstream.auth_session'),'verified',])
         Route::get('fav',[UserController::class,'fav'])->name('fav');
         Route::get('/favdelete/{id}',[UserController::class,"favremove"]);
         Route::get('/addfav/{id}',[UserController::class,"addfav"]);
-
-
          // password
          Route::prefix('password')->group(function(){
             Route::get('changepage',[UserController::class,'changepasswordpage'])->name('userpassword#changepage');
@@ -103,9 +101,11 @@ Route::get('search',[CompanyController::class,'search']);
 Route::get('about',[UserController::class,'about'])->name('about');
 Route::get('contact',[UserController::class,'contact'])->name('contact');
 Route::get('mostinterest',[CarController::class,'mostinterest'])->name('car.interest');
-Route::get('bestsell',[CarController::class,'bestsell'])->name('car.bestsell');
 Route::get('usercarlist',[CarController::class,'usercarlist'])->name('user.carlist');
 Route::get('findcar',[CarController::class,'search']);
+Route::get('/carsearch',[CarController::class,'carsearch']);
+Route::get('bestsellcar/{name}',[CarController::class,'bestsellcar'])->name('car.bestsellcar');
+
 
 
 

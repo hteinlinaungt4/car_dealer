@@ -118,6 +118,13 @@
                             </li>
                             <li class="list-group-item">
                                 <div class="clearfix">
+                                    <span class="pull-left">Engine Power</span>
+
+                                    <strong class="pull-right">{{$car->max_power}}</strong>
+                                </div>
+                            </li>
+                            <li class="list-group-item">
+                                <div class="clearfix">
                                     <span class="pull-left">Car Number</span>
 
                                     <strong class="pull-right">{{$car->number}}</strong>

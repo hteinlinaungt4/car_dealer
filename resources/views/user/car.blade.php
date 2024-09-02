@@ -16,9 +16,12 @@
             </div>
         </div>
     </div>
-    <div class="container">
-        <div class="mr-right d-flex">
-            <input id="search" type="text" class="form-control w-25 border-end-0" placeholder="Search Car...">
+    <div class="container d-flex justify-content-between align-items-center">
+        <div class="">
+            <input id="search" type="text" class="form-control  border-end-0" placeholder="Search Car...">
+        </div>
+        <div>
+            Total:{{count($cars)}}
         </div>
     </div>
     <div class="container mt-5">

@@ -54,7 +54,7 @@
                                                 @endif
                                             </div>
                                         @endif
-                                            <h4>{{$c->company->name}} {{ $c->name }} {{ $c->model }}</h4>
+                                            <h4>{{ $c->name }} {{ $c->model }}</h4>
                                             <h6> {{ $c->price }} (Lakh)</h6>
 
 

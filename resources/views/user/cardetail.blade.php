@@ -213,8 +213,13 @@
                     </div>
                 </div>
                 <div class="col-md-6">
-                    <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Make
-                        Book</button>
+                    @if (Auth::check())
+                        <!-- Button to Open the Modal -->
+                        <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Make Book</button>
+                    @else
+                        <!-- Redirect to Login Page if Not Authenticated -->
+                        <a href="{{ route('login') }}" class="btn btn-info btn-lg">Make Book</a>
+                    @endif
                 </div>
 
             </div>
@@ -222,46 +227,41 @@
     </div>
 
     <!-- Modal -->
-    <!-- Modal -->
-    <div class="modal fade" id="myModal" role="dialog">
-        <div class="modal-dialog">
 
-            <!-- Modal content-->
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h4 class="modal-title">Book</h4>
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-
+    @if (Auth::check())
+        <!-- Modal -->
+        <div class="modal fade" id="myModal" role="dialog">
+            <div class="modal-dialog">
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Book</h4>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+                    <div class="modal-body">
+                        <form method="post" action="{{ route('user.order') }}">
+                            @csrf
+                            <input type="hidden" name="car_id" value="{{ $car->id }}">
+                            <div class="form-group">
+                                <input class="form-control" value="{{ Auth::user()->name }}" type="text" name="name" required placeholder="Name" />
+                            </div>
+                            <div class="form-group">
+                                <input class="form-control" type="email" name="email" required placeholder="Email" value="{{ Auth::user()->email }}" />
+                            </div>
+                            <div class="form-group">
+                                <input class="form-control" type="number" name="phone" maxlength="10" pattern="[0-9]+" placeholder="Mobile Number" value="{{ Auth::user()->phone }}" required />
+                            </div>
+                            <div class="form-group">
+                                <textarea class="form-control" name="message" placeholder="Message" required rows="4"></textarea>
+                            </div>
+                            <button class="btn btn-red btn-lg w-100" type="submit">Submit</button>
+                        </form>
+                    </div>
                 </div>
-                <div class="modal-body">
-                    <form method="post" action="{{route('user.order')}}">
-                        @csrf
-                        <input type="hidden" name="car_id" value="{{$car->id}}">
-                        <div class="form-group">
-                            <input class="form-control" value="{{Auth::user()->name}}" type="text" name="name" required="true"
-                                placeholder="Name" />
-                        </div>
-                        <div class="form-group">
-                            <input class="form-control" type="email" name="email" required="true"
-                                placeholder="Email" value="{{Auth::user()->email}}" />
-                        </div>
-                        <div class="form-group">
-                            <input class="form-control" type="number" name="phone" maxlength="10" pattern="[0-9]+"
-                                placeholder="Mobile Number" value="{{Auth::user()->phone}}" required="true" />
-                        </div>
-                        <div class="form-group">
-                            <textarea class="form-control" name="message" placeholder="Message" required="true" rows="4"></textarea>
-                        </div>
-                        <button class="btn btn-red btn-lg w-100" type="submit">Submit</button>
-                    </form>
-                </div>
-                <!--   <div class="modal-footer">
-            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-          </div> -->
             </div>
-
         </div>
-    </div>
+    @endif
+
 
     </div>
 @endsection

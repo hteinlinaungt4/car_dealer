@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Car;
+use App\Models\CarView;
 use App\Models\Company;
 use Illuminate\Log\Logger;
 use Illuminate\Http\Request;
@@ -255,17 +256,40 @@ class CarController extends Controller
     public function carlistdetail($id)
     {
         $user = Auth::user();
-        $favCars = $user->cars->pluck('id')->toArray();
         $company = Company::where('id', $id)->first();
         $cars = Car::with('company')->where('company_id', $id)->where('status','0')->get();
-        return view('user.detail', compact('cars', 'company', 'favCars'));
+        if(Auth::check()){
+            $favCars = $user->cars->pluck('id')->toArray();
+            return view('user.detail', compact('cars', 'company', 'favCars'));
+
+        }
+        return view('user.detail', compact('cars', 'company'));
+
     }
 
     public function detail($id)
     {
-        $car = Car::with('company')->findorFail($id);
-        $car->view = $car->view + 1;
-        $car->update();
+        $car = Car::with('company')->findOrFail($id);
+        $user = Auth::user();
+
+        if ($user) {
+            // Check if the user has already viewed the car
+            $viewExists = CarView::where('car_id', $car->id)
+                ->where('user_id', $user->id)
+                ->exists();
+
+            if (!$viewExists) {
+                // Increment the car's view count
+                $car->increment('view');
+
+                // Record the user's view in the car_views table
+                CarView::create([
+                    'car_id' => $car->id,
+                    'user_id' => $user->id,
+                ]);
+            }
+        }
+
         return view('user.cardetail', compact('car'));
     }
 
@@ -274,7 +298,7 @@ class CarController extends Controller
     {
         $cars = Car::with('company')
             ->where('view', '>', 0)  // Filter out records with 0 views
-            ->orderBy('view')        // Order by the 'view' attribute
+            ->orderBy('view','desc')        // Order by the 'view' attribute
             ->take(10)               // Take the top 10 records
             ->get();
         $user = Auth::user();

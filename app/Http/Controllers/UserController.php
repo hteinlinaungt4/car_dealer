@@ -25,8 +25,8 @@ class UserController extends Controller
 
 
         $cars = Car::with('company')
-            ->where('view', '>', 0)  // Filter out records with 0 views
-            ->orderBy('view')        // Order by the 'view' attribute
+            ->where('view','>',0)  // Filter out records with 0 views
+            ->orderBy('view','desc')        // Order by the 'view' attribute
             ->take(3)               // Take the top 10 records
             ->get();
 

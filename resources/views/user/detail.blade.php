@@ -38,6 +38,7 @@
                                                 src="{{ asset('storage/cars/' . $c->image1) }}" height="250"
                                                 class=" object-cover"></a>
                                         <div class="down-content">
+                                           @if (Auth::check())
                                             <div>
                                                 @if (in_array($c->id, $favCars))
                                                     <a href="#" class="float-right">
@@ -50,6 +51,7 @@
                                                     </a>
                                                 @endif
                                             </div>
+                                           @endif
                                             <h4>{{$c->company->name}} {{ $c->name }} {{ $c->model }}</h4>
                                             <h6> {{ $c->price }} MMK</h6>
 

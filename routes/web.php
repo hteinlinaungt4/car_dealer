@@ -70,18 +70,13 @@ Route::middleware(['auth:sanctum',config('jetstream.auth_session'),'verified',])
         Route::get('admin/contact',[ContactController::class,'index'])->name('admin.contact');
         Route::get('contact/{id}',[ContactController::class,'update'])->name('admin.contact.update');
 
-
-
         // password
         Route::prefix('adminpassword')->group(function(){
             Route::get('changepage',[AdminController::class,'changepasswordpage'])->name('adminpassword#changepage');
             Route::post('change',[AdminController::class,'changepassword'])->name('adminpassword#change');
         });
-
     });
     Route::middleware(['user_auth'])->group(function(){
-        Route::get('carlist/{id}',[CarController::class,'carlistdetail'])->name('carlist');
-        Route::get('cardetail/{id}',[CarController::class,'detail'])->name('car.detail');
         Route::post('book',[BookController::class,'userorder'])->name("user.order");
         Route::get('fav',[UserController::class,'fav'])->name('fav');
         Route::get('/favdelete/{id}',[UserController::class,"favremove"]);
@@ -94,7 +89,6 @@ Route::middleware(['auth:sanctum',config('jetstream.auth_session'),'verified',])
     });
 });
 
-
 // public
 Route::get('user/dashboard',[UserController::class,'index'])->name('user.dashboard');
 Route::get('search',[CompanyController::class,'search']);
@@ -105,6 +99,8 @@ Route::get('usercarlist',[CarController::class,'usercarlist'])->name('user.carli
 Route::get('findcar',[CarController::class,'search']);
 Route::get('/carsearch',[CarController::class,'carsearch']);
 Route::get('bestsellcar/{name}',[CarController::class,'bestsellcar'])->name('car.bestsellcar');
+Route::get('carlist/{id}',[CarController::class,'carlistdetail'])->name('carlist');
+Route::get('cardetail/{id}',[CarController::class,'detail'])->name('car.detail');
 
 
 

@@ -262,9 +262,9 @@
                                             <div class="down-content">
                                                 ${favIcon}
                                                 <a href="#">
-                                                    <h4>${car.name} ${car.model}</h4>
+                                                    <h4>${c->company->name} ${car.name} ${car.model}</h4>
                                                 </a>
-                                                <h6>${car.price} MMK</h6>
+                                                <h6>${car.price} (Lakh)</h6>
                                                 <small>
                                                     <strong title="Transmission"><i class="fa fa-code-fork" aria-hidden="true"></i> ${car.transmission}</strong>
                                                     &nbsp;&nbsp;

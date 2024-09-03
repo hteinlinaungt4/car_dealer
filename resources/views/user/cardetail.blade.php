@@ -45,19 +45,16 @@
                         </div>
                         <div class="col-sm-6 col-6">
                             <div>
-                                <img src="{{asset('storage/cars/'.$car->image3)}}" alt="" class="img-fluid">
+                                <img src="{{asset('storage/cars/'.$car->image4)}}" alt="" class="img-fluid">
                             </div>
                             <br>
                         </div>
                         <div class="col-sm-6 col-6">
                             <div>
-                                <img src="{{asset('storage/cars/'.$car->image3)}}" alt="" class="img-fluid">
+                                <img src="{{asset('storage/cars/'.$car->image5)}}" alt="" class="img-fluid">
                             </div>
                             <br>
                         </div>
-
-
-
                     </div>
                 </div>
 

@@ -407,20 +407,24 @@ class CarController extends Controller
 
     public function search(Request $request)
     {
-        $query = $request->key;
+        $search = $request->key;
 
-        $car = Car::where('name', 'LIKE', "%{$query}%")
-            ->where('status',"0")
-            ->orwhere('name','LIKE',"%{$query}%")
-            ->orWhere('model', 'LIKE', "%{$query}%")
-            ->orWhere('type', 'LIKE', "%{$query}%")
-            ->orWhere('body_color', 'LIKE', "%{$query}%")
-            ->orWhere('price', 'LIKE', "%{$query}%")
-            ->orWhere('max_power', 'LIKE', "%{$query}%")
-            ->orWhere('mileage', 'LIKE', "%{$query}%")
-            ->orWhere('position', 'LIKE', "%{$query}%")
-            ->orWhere('transmission', 'LIKE', "%{$query}%")
-            ->get();
+        $car = Car::where('status', "0")
+    ->where(function($query) use ($search) {
+        $query->where('name', 'LIKE', "%{$search}%")
+              ->orWhere('model', 'LIKE', "%{$search}%")
+              ->orWhere('type', 'LIKE', "%{$search}%")
+              ->orWhere('body_color', 'LIKE', "%{$search}%")
+              ->orWhere('price', 'LIKE', "%{$search}%")
+              ->orWhere('max_power', 'LIKE', "%{$search}%")
+              ->orWhere('mileage', 'LIKE', "%{$search}%")
+              ->orWhere('position', 'LIKE', "%{$search}%")
+              ->orWhere('transmission', 'LIKE', "%{$search}%");
+    })
+    ->orWhereHas('company', function($query) use ($search) {
+        $query->where('name', 'LIKE', "%{$search}%");
+    })
+    ->get();
         return response()->json($car);
     }
 

@@ -411,6 +411,7 @@ class CarController extends Controller
 
         $car = Car::where('name', 'LIKE', "%{$query}%")
             ->where('status',"0")
+            ->orwhere('name','LIKE',"%{$query}%")
             ->orWhere('model', 'LIKE', "%{$query}%")
             ->orWhere('type', 'LIKE', "%{$query}%")
             ->orWhere('body_color', 'LIKE', "%{$query}%")

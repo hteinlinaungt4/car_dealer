@@ -409,7 +409,7 @@ class CarController extends Controller
     {
         $search = $request->key;
 
-        $car = Car::where('status', "0")
+        $car = Car::with('company')->where('status', "0")
     ->where(function($query) use ($search) {
         $query->where('name', 'LIKE', "%{$search}%")
               ->orWhere('model', 'LIKE', "%{$search}%")

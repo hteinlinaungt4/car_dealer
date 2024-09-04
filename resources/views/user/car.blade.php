@@ -185,7 +185,6 @@
                 },
                 success: function(data) {
                     $('#result').empty();
-
                     $.each(data, function(index, car) {
                         $('#result').append(`
                         <div class="col-md-4">
@@ -193,9 +192,9 @@
                                 <a href="cardetail/${car.id}"><img src="/storage/cars/${car.image1}" height="250" class="object-cover"></a>
                                 <div class="down-content">
                                     <a href="">
-                                        <h4>${car.name} ${car.model}</h4>
+                                        <h4>${car.company.name} ${car.name} ${car.model}</h4>
                                     </a>
-                                    <h6>${car.price} MMK</h6>
+                                    <h6>${car.price} (Lakh)</h6>
                                     <small>
                                         <strong title="Author"><i class="fa fa-code-fork" aria-hidden="true"></i> ${car.transmission}</strong>
                                         &nbsp;&nbsp;

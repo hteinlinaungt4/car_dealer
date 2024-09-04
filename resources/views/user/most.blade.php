@@ -45,9 +45,9 @@
                                                     @endif
                                                 </div>
                                             @endif
-                                                <h4>{{ $c->name }} {{ $c->model }}</h4>
+                                                <h4>{{$c->company->name}} {{ $c->name }} {{ $c->model }}</h4>
 
-                                            <h6> {{ $c->price }} (Lkah)</h6>
+                                            <h6> {{ $c->price }} (Lakh)</h6>
 
                                             <small>
                                                 <strong title="Author"><i class="fa fa-code-fork" aria-hidden="true"></i>

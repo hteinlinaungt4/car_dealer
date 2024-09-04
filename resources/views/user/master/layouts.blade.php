@@ -33,6 +33,7 @@
             <div class="container">
                 <a class="navbar-brand" href="{{ route('user.dashboard') }}">
                     <h2> <em>Tokyo</em>  Car <em>Dealer</em></h2>
+                    {{-- <img width="150px" height="50px" src="{{asset('logo/logo6.jpg')}}" alt="" srcset=""> --}}
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
                     aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">

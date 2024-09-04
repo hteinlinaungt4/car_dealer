@@ -262,7 +262,7 @@
                                             <div class="down-content">
                                                 ${favIcon}
                                                 <a href="#">
-                                                    <h4>${c->company->name} ${car.name} ${car.model}</h4>
+                                                    <h4>${car.company.name} ${car.name} ${car.model}</h4>
                                                 </a>
                                                 <h6>${car.price} (Lakh)</h6>
                                                 <small>

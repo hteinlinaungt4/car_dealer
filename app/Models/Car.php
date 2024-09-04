@@ -34,7 +34,7 @@ class Car extends Model
         'position',
         'view',
         'status',
-        'sales_count'
+
     ];
 
 

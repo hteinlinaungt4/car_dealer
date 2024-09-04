@@ -297,7 +297,7 @@ class CarController extends Controller
     public function mostinterest()
     {
         $cars = Car::with('company')
-            ->where('view', '>', 0)  // Filter out records with 0 views
+            ->where('view','>', 0)  // Filter out records with 0 views
             ->orderBy('view','desc')        // Order by the 'view' attribute
             ->take(10)               // Take the top 10 records
             ->get();
@@ -426,7 +426,7 @@ class CarController extends Controller
     public function carsearch(Request $request)
     {
         // $query = Car::query();
-        $query = Car::where('status',"0");
+        $query = Car::with('company')->where('status',"0");
 
 
         if ($request->filled('brand')) {

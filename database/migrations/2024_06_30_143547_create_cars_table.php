@@ -31,7 +31,7 @@ return new class extends Migration {
             $table->longText('description');
             $table->string('max_power');
             $table->string('position');
-            $table->integer('view')->default(0);
+            $table->unsignedInteger('view')->default(0);
             $table->enum('status',['0','1'])->default('0');
             $table->timestamps();
         });

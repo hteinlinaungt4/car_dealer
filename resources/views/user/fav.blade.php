@@ -45,7 +45,7 @@
                                             <h6>Position</h6>
                                             <p>{{ $f->position }}</p>
                                             <h6>Price</h6>
-                                            <p>{{ $f->price }} MMK</p>
+                                            <p>{{ $f->price }} (Lakh)</p>
                                         </div>
                                         <button data-id="{{ $f->id }}"
                                             class="btn btn-danger btn-sm mt-3 delete_btn">Remove Favourite</button>

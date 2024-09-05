@@ -74,8 +74,8 @@
     @endif
 
 @endsection
-@section('script')
-    {{-- <script>
+{{-- @section('script')
+    <script>
         $(document).on('click', '.add-fav-btn', function(e) {
             e.preventDefault();
             var id = $(this).data('id');
@@ -90,5 +90,5 @@
                     ); // Replace with full star icon
                 });
         });
-    </script> --}}
-@endsection
+    </script>
+@endsection --}}

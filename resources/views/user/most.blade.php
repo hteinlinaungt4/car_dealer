@@ -31,7 +31,7 @@
                                                 src="{{ asset('storage/cars/' . $c->image1) }}" height="250"
                                                 class=" object-cover">
                                         <div class="down-content">
-                                            @if (Auth::check())
+                                            {{-- @if (Auth::check())
                                                 <div>
                                                     @if (in_array($c->id, $favCars))
                                                         <a href="#" class="float-right">
@@ -44,7 +44,7 @@
                                                         </a>
                                                     @endif
                                                 </div>
-                                            @endif
+                                            @endif --}}
                                                 <h4>{{$c->company->name}} {{ $c->name }} {{ $c->model }}</h4>
 
                                             <h6> {{ $c->price }} (Lakh)</h6>
@@ -75,7 +75,7 @@
 
 @endsection
 @section('script')
-    <script>
+    {{-- <script>
         $(document).on('click', '.add-fav-btn', function(e) {
             e.preventDefault();
             var id = $(this).data('id');
@@ -90,5 +90,5 @@
                     ); // Replace with full star icon
                 });
         });
-    </script>
+    </script> --}}
 @endsection

@@ -7,8 +7,8 @@
         <div class="row">
           <div class="col-md-12">
             <div class="text-content">
-              <h4>about us</h4>
-              <h2>our company</h2>
+              <h4>{{ __('messages.about_us')}}</h4>
+              <h2>{{ __('messages.our_company')}}</h2>
             </div>
           </div>
         </div>
@@ -36,7 +36,7 @@
         <div class="row">
           <div class="col-md-12">
 
-              <h3 class="my-3">About Us</h3>
+              <h3 class="my-3">{{ __('messages.about_us')}}</h3>
               <p>{{$about->description}}</p>
           </div>
         </div>

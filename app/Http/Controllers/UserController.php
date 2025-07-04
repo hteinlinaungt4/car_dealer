@@ -11,9 +11,12 @@ use Illuminate\Http\Request;
 use Yajra\DataTables\DataTables;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
+use App\Models\Book;
+use App\Models\Invoice;
 use Illuminate\Foundation\Auth\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Validator;
 
 class UserController extends Controller
@@ -163,5 +166,31 @@ class UserController extends Controller
             'comfirmpassword' => 'required|min:6|max:10|same:newpassword',
         ];
         Validator::make($request->all(), $validation)->validate();
+    }
+
+    public function book()
+    {
+        $user = Auth::user();
+       $bookings = Book::with('car')
+            ->where('user_id', $user->id)
+            ->orderBy('created_at', 'asc')
+            ->get();
+        return view('user.book', compact('bookings'));
+    }
+
+    public function vouchersDetail($invoiceId)
+    {
+        $invoice = Invoice::where('invoice_id', $invoiceId)->firstOrFail();
+        return view('user.invoicedetail', compact('invoice'));
+
+    }
+
+    public function voucher()
+    {
+        $user = Auth::user();
+        $invoices = Invoice::where('buyer_name', $user->name)
+            ->orderBy('created_at', 'desc')
+            ->get();
+        return view('user.invoices', compact('invoices'));
     }
 }

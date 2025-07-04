@@ -1,15 +1,20 @@
 <?php
 
-use App\Http\Controllers\AboutController;
+use App\Models\Company;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\AuthController;
-use App\Http\Controllers\UserController;
-use App\Http\Controllers\AdminController;
-use App\Http\Controllers\BookController;
 use App\Http\Controllers\CarController;
+use Illuminate\Support\Facades\Session;
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\BookController;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\AboutController;
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\ContactController;
-use App\Models\Company;
+use App\Http\Controllers\InquiryController;
+use App\Http\Controllers\Admin\AdminInquiryController;
+use Illuminate\Support\Facades\Log;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,6 +26,7 @@ use App\Models\Company;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+
 
 Route::middleware('admin_auth')->group(function(){
     Route::redirect('/', '/user/dashboard');
@@ -75,12 +81,38 @@ Route::middleware(['auth:sanctum',config('jetstream.auth_session'),'verified',])
             Route::get('changepage',[AdminController::class,'changepasswordpage'])->name('adminpassword#changepage');
             Route::post('change',[AdminController::class,'changepassword'])->name('adminpassword#change');
         });
+
+        // inquiries
+        Route::get('admin/inquiries', [AdminInquiryController::class, 'index'])->name('admin.inquiries.index');
+        Route::get('inquiries/ssd',[AdminInquiryController::class,'ssd']);
+
+        // invoice
+        Route::get('admin/invoices', [AdminController::class, 'invoice'])->name('admin.invoices.index');
+        Route::get('invoices/ssd', [AdminController::class, 'ssdInvoices']);
+
+        //process
+        Route::get('admin/process', [AdminController::class, 'process'])->name('admin.process.index');
+        Route::get('process/ssd', [AdminController::class, 'ssdProcess']);
+
+        Route::post('confirm', [AdminController::class, 'confirm']);
+
+        Route::post('/inquiries/{id}/reply', [AdminInquiryController::class, 'reply'])->name('admin.inquiries.reply');
+
     });
     Route::middleware(['user_auth'])->group(function(){
         Route::post('book',[BookController::class,'userorder'])->name("user.order");
         Route::get('fav',[UserController::class,'fav'])->name('fav');
         Route::get('/favdelete/{id}',[UserController::class,"favremove"]);
         Route::get('/addfav/{id}',[UserController::class,"addfav"]);
+        Route::get('user_book',[UserController::class,'book'])->name('booking');
+
+        Route::get('/inquiries', [InquiryController::class, 'index'])->name('inquiries.index');
+        Route::get('/inquiries/create/{car}', [InquiryController::class, 'create'])->name('inquiries.create');
+        Route::post('/inquiries', [InquiryController::class, 'store'])->name('inquiries.store');
+
+        Route::get("user/invoices/{id}",[UserController::class,'vouchersDetail'])->name('user.invoices.detail');
+        Route::get("user/invoices",[UserController::class,'voucher'])->name('user.invoices');
+
          // password
          Route::prefix('password')->group(function(){
             Route::get('changepage',[UserController::class,'changepasswordpage'])->name('userpassword#changepage');
@@ -101,6 +133,14 @@ Route::get('/carsearch',[CarController::class,'carsearch']);
 Route::get('bestsellcar/{name}',[CarController::class,'bestsellcar'])->name('car.bestsellcar');
 Route::get('carlist/{id}',[CarController::class,'carlistdetail'])->name('carlist');
 Route::get('cardetail/{id}',[CarController::class,'detail'])->name('car.detail');
+
+Route::get('/locale-switch/{locale}', function ($locale) {
+    if (in_array($locale, ['en', 'my'])) {
+        Session::put('locale', $locale);
+        App::setLocale($locale);
+    }
+    return redirect()->back();
+})->name('locale.switch');
 
 
 

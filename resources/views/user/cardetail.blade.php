@@ -1,6 +1,18 @@
 @extends('user.master.layouts')
 @section('title', 'Car Detail Lists')
 @section('content')
+<style>
+      .admin-note {
+        background-color: #eaf6ff; /* Light blue for note */
+        border-left: 4px solid #007bff;
+        padding: 20px;
+        border-radius: 4px;
+        margin-top: 40px;
+        font-style: italic;
+        color: #0056b3;
+    }
+
+</style>
     <div class="page-heading about-heading header-text" style="background-image: url({{asset('user/assets/images/heading-6-1920x500.jpg')}});">
         <div class="container">
             <div class="row">
@@ -17,7 +29,7 @@
     <div class="container">
         <div class="row">
             <div class="mt-5">
-                <i class="fa fa-home"></i> <a href="{{route('user.dashboard')}}">Home</a> > <a onclick="window.history.back()">Carlist</a> > Detail
+                <i class="fa fa-home"></i> <a href="{{route('user.dashboard')}}">{{ __('messages.home') }}</a> > <a onclick="window.history.back()">{{ __('messages.carlist') }}</a> > {{ __('messages.detail') }}
             </div>
         </div>
     </div>
@@ -65,21 +77,21 @@
 
                             <li class="list-group-item">
                                 <div class="clearfix">
-                                    <span class="pull-left">Car Model</span>
+                                    <span class="pull-left">{{ __('messages.car_model') }}</span>
 
                                     <strong class="pull-right">{{$car->name}}</strong>
                                 </div>
                             </li>
                             <li class="list-group-item">
                                 <div class="clearfix">
-                                    <span class="pull-left">Car Company</span>
+                                    <span class="pull-left">{{ __('messages.car_company') }}</span>
 
                                     <strong class="pull-right">{{$car->company->name}}</strong>
                                 </div>
                             </li>
                             <li class="list-group-item">
                                 <div class="clearfix">
-                                    <span class="pull-left">Year</span>
+                                    <span class="pull-left">{{ __('messages.year') }}</span>
 
                                     <strong class="pull-right">{{$car->model}}</strong>
                                 </div>
@@ -87,42 +99,36 @@
 
                             <li class="list-group-item">
                                 <div class="clearfix">
-                                    <span class="pull-left">Car Type</span>
+                                    <span class="pull-left">{{ __('messages.car_type') }}</span>
 
                                     <strong class="pull-right">{{$car->type}}</strong>
                                 </div>
                             </li>
-                            <li class="list-group-item">
-                                <div class="clearfix">
-                                    <span class="pull-left">No of owner</span>
 
-                                    <strong class="pull-right">{{$car->no_of_owners}}</strong>
-                                </div>
-                            </li>
                             <li class="list-group-item">
                                 <div class="clearfix">
-                                    <span class="pull-left">Car Body Color</span>
+                                    <span class="pull-left">{{ __('messages.car_body_color') }}</span>
 
                                     <strong class="pull-right">{{$car->body_color}}</strong>
                                 </div>
                             </li>
                             <li class="list-group-item">
                                 <div class="clearfix">
-                                    <span class="pull-left">Steering Position</span>
+                                    <span class="pull-left">{{ __('messages.steering_position') }}</span>
 
                                     <strong class="pull-right">{{$car->position}}</strong>
                                 </div>
                             </li>
                             <li class="list-group-item">
                                 <div class="clearfix">
-                                    <span class="pull-left">Engine Power</span>
+                                    <span class="pull-left">{{ __('messages.engine_power') }}</span>
 
                                     <strong class="pull-right">{{$car->max_power}}</strong>
                                 </div>
                             </li>
                             <li class="list-group-item">
                                 <div class="clearfix">
-                                    <span class="pull-left">Car Number</span>
+                                    <span class="pull-left">{{ __('messages.car_number') }}</span>
 
                                     <strong class="pull-right">{{$car->number}}</strong>
                                 </div>
@@ -130,7 +136,7 @@
 
                             <li class="list-group-item">
                                 <div class="clearfix">
-                                    <span class="pull-left">Car Price</span>
+                                    <span class="pull-left">{{ __('messages.car_price') }}</span>
 
                                     <strong class="pull-right">{{$car->price}} (Lakh)</strong>
                                 </div>
@@ -138,23 +144,31 @@
 
                             <li class="list-group-item">
                                 <div class="clearfix">
-                                    <span class="pull-left">Car Fuel Type</span>
+                                    <span class="pull-left">{{ __('messages.car_fuel_type') }}</span>
 
                                     <strong class="pull-right">{{$car->fuel_type}}</strong>
                                 </div>
                             </li>
                             <li class="list-group-item">
                                 <div class="clearfix">
-                                    <span class="pull-left">Kilometers</span>
+                                    <span class="pull-left">{{ __('messages.kilometer') }}</span>
 
                                     <strong class="pull-right">{{$car->mileage}}</strong>
                                 </div>
                             </li>
                             <li class="list-group-item">
                                 <div class="clearfix">
-                                    <span class="pull-left">Description</span>
+                                    <span class="pull-left">{{ __('messages.description') }}</span>
 
                                     <strong class="pull-right">{{$car->description}}</strong>
+                                </div>
+                            </li>
+                            <li class="list-group-time">
+                                <div class="clearfix">
+                                     <div class="admin-note">
+                                            <p><strong>{{__('messages.insurance')}}</strong></p>
+                                            {{-- Replace with dynamic data: <p><strong>Note from Admin:</strong> {{ $invoice->admin_reply }}</p> --}}
+                                        </div>
                                 </div>
                             </li>
                         </ul>
@@ -171,7 +185,7 @@
     <div class="section">
         <div class="container">
             <div class="section-heading">
-                <h2>Contact Details</h2>
+                <h2>{{ __('messages.contact_details') }}</h2>
             </div>
             <div class="row">
                 <div class="col-md-6">
@@ -179,7 +193,7 @@
 
                     <div class="left-content">
                         <p>
-                            <span>Address</span>
+                            <span>{{ __('messages.address') }}</span>
 
                             <br>
 
@@ -187,7 +201,7 @@
                         </p>
 
                         <p>
-                            <span>Phone</span>
+                            <span>{{ __('messages.phone') }}</span>
 
                             <br>
 
@@ -199,7 +213,7 @@
 
 
                         <p>
-                            <span>Email</span>
+                            <span>{{  __('messages.email')}}</span>
 
                             <br>
 
@@ -212,10 +226,14 @@
                 <div class="col-md-6">
                     @if (Auth::check())
                         <!-- Button to Open the Modal -->
-                        <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Make Book</button>
+                        <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">{{ __('messages.make_book')}}</button>
+                        <br><br>
+                        <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#Modal">{{ __('messages.inquiry')}}</button>
+
                     @else
                         <!-- Redirect to Login Page if Not Authenticated -->
-                        <a href="{{ route('login') }}" class="btn btn-info btn-lg">Make Book</a>
+                        <a href="{{ route('login') }}" class="btn btn-info btn-lg">{{ __('messages.make_book')}}</a>
+                        <a href="{{ route('login') }}" class="btn btn-info btn-lg">{{ __('messages.inquiry')}}</a>
                     @endif
                 </div>
 
@@ -241,6 +259,7 @@
                             <input type="hidden" name="car_id" value="{{ $car->id }}">
                             <div class="form-group">
                                 <input class="form-control" value="{{ Auth::user()->name }}" type="text" name="name" required placeholder="Name" />
+                                <input class="form-control" value="{{ Auth::user()->id }}" type="hidden" name="user_id" />
                             </div>
                             <div class="form-group">
                                 <input class="form-control" type="email" name="email" required placeholder="Email" value="{{ Auth::user()->email }}" />
@@ -257,8 +276,55 @@
                 </div>
             </div>
         </div>
+
+        <!-- Inquiry Modal -->
+        <div class="modal fade" id="Modal" role="dialog">
+            <div class="modal-dialog">
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Inquiry Form</h4>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+                    <div class="modal-body">
+                        <form method="post" action="{{ route('inquiries.store') }}">
+                            @csrf
+                            <input type="hidden" name="car_id" value="{{ $car->id }}">
+                            <div class="form-group">
+                                <input class="form-control" value="{{ Auth::user()->name }}" type="text" name="name" required placeholder="Name" />
+                                <input class="form-control" value="{{ Auth::user()->id }}" type="hidden" name="user_id" />
+                            </div>
+                            <div class="form-group">
+                                <textarea class="form-control" name="message" placeholder="Message" required rows="4"></textarea>
+                            </div>
+                            <button class="btn btn-red btn-lg w-100" type="submit">Submit</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
     @endif
 
 
     </div>
+@endsection
+
+@section('script')
+<script>
+     @if(session('error'))
+        Swal.fire({
+            icon: 'warning',
+            title: 'Already Booked',
+            text: 'You have already booked this car.',
+        });
+    @endif
+
+    @if(session('success'))
+        Swal.fire({
+            icon: 'success',
+            title: 'Booking Successful!',
+            text: 'Your booking has been confirmed.',
+        });
+    @endif
+</script>
 @endsection

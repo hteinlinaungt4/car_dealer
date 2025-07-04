@@ -16,11 +16,11 @@
         <div class="container mb-5">
             <div class="mr-right d-flex">
                 <input id="search" type="text" class="form-control w-25 border-end-0"
-                    placeholder="Search Car Brand...">
+                    placeholder="{{ __('messages.search_car') }}">
             </div>
         </div>
         <div class="container mb-3">
-            <h3 class="mb-3">Car Brands</h3>
+            <h3 class="mb-3">{{ __('messages.car_brand') }}</h3>
             <div class="row" id="result">
                     @foreach ($company as $c)
                         <div class="col-md-3">
@@ -42,7 +42,7 @@
 
         @if(count($cars) != 0)
         <div class="container">
-            <h3 class="mt-5">Most Interest Cars</h3>
+            <h3 class="mt-5">{{ __('messages.most_interest_car') }}</h3>
             <div class="products">
                 <div class="container">
                     <div class="row">
@@ -53,7 +53,7 @@
                                         <div class="product-item">
                                             <img src="{{asset('storage/cars/'.$c->image1)}}" height="250" class=" object-cover">
                                             <div class="down-content">
-                                                    <h4>{{$c->company->name}} {{$c->name}} {{$c->model}}</h4>
+                                                    <h4>{{$c->name}} {{$c->model}}</h4>
 
                                                 <h6> {{$c->price}} (Lakh)</h6>
 
@@ -71,7 +71,7 @@
                                 @endforeach
                             </div>
                             <div class="float-right mb-3">
-                                <a href="{{route('car.interest')}}" class="btn btn-danger btn-sm" >See More Interest Car</a>
+                                <a href="{{route('car.interest')}}" class="btn btn-danger btn-sm" >{{ __('messages.see_more_car')}}</a>
                             </div>
                         </div>
                     </div>
@@ -84,7 +84,7 @@
 
 
         <div class="container">
-            <h3 class="my-5">Most Best Sell Model</h3>
+            <h3 class="my-5">{{ __('messages.bestsell_model') }}</h3>
             <div class="row mx-auto">
                 @foreach ($bestsellmodel as $b)
                     <div class="col-md-4 py-3">

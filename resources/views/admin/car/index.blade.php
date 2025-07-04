@@ -16,6 +16,7 @@
                             <th>Name</th>
                             <th>Company</th>
                             <th>Price</th>
+                            <th>Status</th>
                             <th class="nosort">Actions</th>
                         </thead>
                     </table>

@@ -27,12 +27,11 @@ return new class extends Migration {
             $table->string('fuel_type');
             $table->string('mileage');
             $table->string('transmission');
-            $table->integer('no_of_owners');
             $table->longText('description');
             $table->string('max_power');
             $table->string('position');
             $table->unsignedInteger('view')->default(0);
-            $table->enum('status',['0','1'])->default('0');
+            $table->enum('status', ['0', '1'])->default(0);
             $table->timestamps();
         });
     }

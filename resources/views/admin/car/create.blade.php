@@ -178,12 +178,7 @@
                                     </div>
                                 </div>
 
-                                <div class="form-group">
-                                    <label class="col-sm-2 control-label">No. of Owners</label>
-                                    <div class="col-sm-10">
-                                        <input class="form-control" id="cno_of_owners" name="no_of_owners" type="number" required>
-                                    </div>
-                                </div>
+
 
                             </div>
                         </section>

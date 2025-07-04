@@ -32,7 +32,8 @@
         <nav class="navbar navbar-expand-lg">
             <div class="container">
                 <a class="navbar-brand" href="{{ route('user.dashboard') }}">
-                    <h2> <em>Tokyo</em>  Car <em>Dealer</em></h2>
+                    {{-- <h2> <em>Tokyo</em>  Car <em>Dealer</em></h2> --}}
+                    {{ __('messages.welcome') }}
                     {{-- <img width="150px" height="50px" src="{{asset('logo/logo6.jpg')}}" alt="" srcset=""> --}}
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
@@ -41,18 +42,20 @@
                 </button>
                 <div class="collapse navbar-collapse" id="navbarResponsive">
                     <ul class="navbar-nav ml-auto ">
+
                         <li class="nav-item active">
-                            <a class="nav-link" href="{{ route('user.dashboard') }}">Home
+                            <a class="nav-link" href="{{ route('user.dashboard') }}">  {{ __('messages.home') }}
                             </a>
                         </li>
-                        <li class="nav-item"><a class="nav-link" href="{{route('user.carlist')}}">All Cars</a></li>
-                        <li class="nav-item"><a class="nav-link" href="{{ route('about') }}">About</a></li>
-                        <li class="nav-item"><a class="nav-link" href="{{ route('contact') }}">Contact</a></li>
-                        <li class="nav-item"><a class="nav-link" href="{{route('car.interest')}}">Most Interest Cars</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{{ route('user.carlist') }}">  {{ __('messages.cars') }}</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{{ route('about') }}">  {{ __('messages.about') }}</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{{ route('contact') }}">  {{ __('messages.contact') }}</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{{ route('car.interest') }}">  {{ __('messages.most_interest_car') }}</a></li>
+
                         @if (!Auth::check())
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ route('login') }}"><i class="fa fa-user-circle"
-                                        aria-hidden="true"></i> Login</a>
+                                        aria-hidden="true"></i>  {{ __('messages.login') }}</a>
                             </li>
                             {{-- <li class="nav-item">
                                 <a class="nav-link" href="{{ route('register') }}"><i class="fa fa-user-circle"
@@ -66,23 +69,48 @@
                                     {{ Auth::user()->name }}
                                     <i class="fa fa-angle-down" aria-hidden="true"></i></a>
                                 <ul class="dropdown-menu">
-                                    <li class="nav-item"><a class="nav-link" href="{{route('userpassword#changepage')}}">Password Update</a></li>
-                                    <li class="nav-item"><a class="nav-link" href="{{route('fav')}}">Favourite Lists</a></li>
+                                    <li class="nav-item"><a class="nav-link"
+                                            href="{{ route('userpassword#changepage') }}"> {{ __('messages.password_update') }}</a></li>
+                                    <li class="nav-item"><a class="nav-link" href="{{ route('fav') }}">{{ __('messages.favorite') }}</a></li>
+                                    <li class="nav-item"><a class="nav-link" href="{{ route('booking') }}">{{ __('messages.booking') }}</a></li>
+                                    <li class="nav-item"><a class="nav-link" href="{{ route('inquiries.index') }}">{{ __('messages.inquires') }}</a></li>
+                                     <li class="nav-item"><a class="nav-link" href="{{ route('user.invoices') }}">
+                                            {{ __('messages.invoices') }}</a></li>
                                     <li class="nav-item">
                                         <form class="nav-link" method="POST" action="{{ route('logout') }}">
                                             @csrf
-                                            <button class=" bg-transparent text-white border-0">Logout</button>
+                                            <button class=" bg-transparent text-white border-0">{{ __('messages.logout') }}</button>
                                         </form>
                                     </li>
                                 </ul>
                             </li>
-
-
-
-
                         @endif
+                        <li class="dropdown nav-item">
+                            <a href="#" class="nav-link" data-toggle="dropdown" aria-haspopup="true"
+                                aria-expanded="false">
+                                <i class="fa fa-globe"></i>
+                                {{ app()->getLocale() == 'en' ? 'English' : 'Myanmar' }}
+                                <i class="fa fa-angle-down" aria-hidden="true"></i>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li class="nav-item">
+                                    <a class="nav-link {{ app()->getLocale() == 'en' ? 'active' : '' }}"
+                                        href="{{ route('locale.switch', ['locale' => 'en']) }}">
+                                        English
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link {{ app()->getLocale() == 'my' ? 'active' : '' }}"
+                                        href="{{ route('locale.switch', ['locale' => 'my']) }}">
+                                        Myanmar
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+
 
                     </ul>
+
                 </div>
             </div>
         </nav>

@@ -13,12 +13,15 @@ return new class extends Migration
     {
         Schema::create('books', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('user_id');
             $table->string('name');
             $table->string('email');
             $table->string('phone');
             $table->unsignedBigInteger('car_id');
             $table->longText('message');
-            $table->enum('status',['0','1'])->default('0');
+            $table->enum('status', ['pending', 'confirmed', 'rejected'])->default('pending');
+            $table->enum('invoices', ['0', '1'])->default('0');
+            $table->date('driving_date')->nullable();
             $table->timestamps();
             $table->foreign('car_id')->references('id')->on('cars')->onDelete('cascade');
         });

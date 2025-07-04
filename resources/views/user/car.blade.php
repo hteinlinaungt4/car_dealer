@@ -9,8 +9,8 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="text-content">
-                        <h4>All</h4>
-                        <h2>Cars</h2>
+                        {{-- <h4>All</h4> --}}
+                        <h2>{{ __('messages.cars') }}</h2>
                     </div>
                 </div>
             </div>
@@ -18,10 +18,10 @@
     </div>
     <div class="container d-flex justify-content-between align-items-center">
         <div class="">
-            <input id="search" type="text" class="form-control  border-end-0" placeholder="Search Car...">
+            <input id="search" type="text" class="form-control  border-end-0" placeholder="{{ __('messages.search_car') }}">
         </div>
         <div>
-            Total:{{count($cars)}}
+          {{ __('messages.total')}} {{count($cars)}}
         </div>
     </div>
     <div class="container mt-5">
@@ -29,9 +29,9 @@
             <div class="col-12 col-sm-6 col-md-4 mb-3">
                 <div class="d-flex flex-column h-100">
                     <div class="form-group mb-3 flex-grow-1">
-                        <label for="brand">Brand:</label>
+                        <label for="brand">{{ __('messages.brand') }}:</label>
                         <select name="brand" id="brand" class="form-control">
-                            <option value="">Select Brand</option>
+                            <option value="">{{ __('messages.select_brand') }}</option>
                             @foreach ($companies as $brand)
                                 <option value="{{ $brand->id }}">{{ $brand->name }}</option>
                             @endforeach
@@ -43,9 +43,9 @@
             <div class="col-12 col-sm-6 col-md-4 mb-3">
                 <div class="d-flex flex-column h-100">
                     <div class="form-group mb-3 flex-grow-1">
-                        <label for="model">Model:</label>
+                        <label for="model">{{ __('messages.model') }}:</label>
                         <select name="model" id="model" class="form-control">
-                            <option value="">Select Model</option>
+                            <option value="">{{ __('messages.select_model') }}</option>
                             @foreach ($models as $model)
                                 <option value="{{ $model }}">{{ $model }}</option>
                             @endforeach
@@ -57,9 +57,9 @@
             <div class="col-12 col-sm-6 col-md-4 mb-3">
                 <div class="d-flex flex-column h-100">
                     <div class="form-group mb-3 flex-grow-1">
-                        <label for="color">Color:</label>
+                        <label for="color">{{ __('messages.color') }}:</label>
                         <select name="color" id="color" class="form-control">
-                            <option value="">Select Color</option>
+                            <option value="">{{ __('messages.select_color') }}</option>
                             @foreach ($colors as $color)
                                 <option value="{{ $color }}">{{ $color }}</option>
                             @endforeach
@@ -71,7 +71,7 @@
             <div class="col-12 col-sm-6 col-md-4 mb-3">
                 <div class="d-flex flex-column h-100">
                     <div class="form-group mb-3 flex-grow-1">
-                        <label for="min_price">Min Price:</label>
+                        <label for="min_price">{{ __('messages.min_price') }}:</label>
                         <input type="number" name="min_price" id="min_price" class="form-control">
                     </div>
                 </div>
@@ -80,13 +80,13 @@
             <div class="col-12 col-sm-6 col-md-4 mb-3">
                 <div class="d-flex flex-column h-100">
                     <div class="form-group mb-3 flex-grow-1">
-                        <label for="max_price">Max Price:</label>
+                        <label for="max_price">{{ __('messages.max_price') }}:</label>
                         <input type="number" name="max_price" id="max_price" class="form-control">
                     </div>
                 </div>
             </div>
         </div>
-        <button class="btn btn-primary w-100 " id="searchcar">Search</button>
+        <button class="btn btn-primary w-100 " id="searchcar">{{ __('messages.search') }}</button>
     </div>
 
 
@@ -121,7 +121,7 @@
                                                 </div>
                                             @endif
                                             <a href="">
-                                                <h4>{{$c->company->name}} {{ $c->name }} {{ $c->model }}</h4>
+                                                <h4> {{ $c->name }} {{ $c->model }}</h4>
                                             </a>
 
                                             <h6> {{ $c->price }} (Lakh)</h6>
@@ -192,7 +192,7 @@
                                 <a href="cardetail/${car.id}"><img src="/storage/cars/${car.image1}" height="250" class="object-cover"></a>
                                 <div class="down-content">
                                     <a href="">
-                                        <h4>${car.company.name} ${car.name} ${car.model}</h4>
+                                        <h4> ${car.name} ${car.model}</h4>
                                     </a>
                                     <h6>${car.price} (Lakh)</h6>
                                     <small>
@@ -261,7 +261,7 @@
                                             <div class="down-content">
                                                 ${favIcon}
                                                 <a href="#">
-                                                    <h4>${car.company.name} ${car.name} ${car.model}</h4>
+                                                    <h4> ${car.name} ${car.model}</h4>
                                                 </a>
                                                 <h6>${car.price} (Lakh)</h6>
                                                 <small>

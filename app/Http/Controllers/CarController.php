@@ -45,9 +45,15 @@ class CarController extends Controller
                     . '</div>';
             })
             ->editColumn('status', function ($each) {
-                $stock = ($each->status == "0") ? '<span class="badge rounded-pill bg-success p-3 text-white">For Sell</span>' : '<span class="badge rounded-pill bg-danger p-3 text-white">Sold Out</span>';
+                // Check if the status is 'pending' or not
+                if ($each->status == "1") {
+                    $stock = '<span class="badge rounded-pill bg-danger p-3 text-white">Sold Out</span>';
+                } else {
+                    $stock = '<span class="badge rounded-pill bg-success p-3 text-white">For Sell</span>';
+                }
                 return $stock;
             })
+
             ->filterColumn('status', function ($query, $keyword) {
                 $keyword = strtolower(trim($keyword));
 
@@ -57,8 +63,6 @@ class CarController extends Controller
                     $query->where('status', '1');
                 }
             })
-
-
             ->rawColumns(['actions', 'image', 'status'])
             ->make(true);
     }
@@ -95,7 +99,6 @@ class CarController extends Controller
             'transmission' => 'required|string|max:255',
             'max_power' => 'required|string|max:255',
             'description' => 'nullable|string',
-            'no_of_owners' => 'required|integer',
         ];
 
         Validator::make($request->all(), $validation)->validate();
@@ -129,7 +132,6 @@ class CarController extends Controller
         $car->transmission = $request->input('transmission');
         $car->max_power = $request->input('max_power');
         $car->description = $request->input('description');
-        $car->no_of_owners = $request->input('no_of_owners');
         $car->save();
 
         return redirect()
@@ -182,7 +184,6 @@ class CarController extends Controller
             'transmission' => 'required|string|max:255',
             'max_power' => 'required|string|max:255',
             'description' => 'nullable|string',
-            'no_of_owners' => 'required|integer',
         ];
 
         Validator::make($request->all(), $validation)->validate();
@@ -221,7 +222,6 @@ class CarController extends Controller
         $car->transmission = $request->input('transmission');
         $car->max_power = $request->input('max_power');
         $car->description = $request->input('description');
-        $car->no_of_owners = $request->input('no_of_owners');
         $car->save();
 
         return redirect()
@@ -257,14 +257,12 @@ class CarController extends Controller
     {
         $user = Auth::user();
         $company = Company::where('id', $id)->first();
-        $cars = Car::with('company')->where('company_id', $id)->where('status','0')->get();
-        if(Auth::check()){
+        $cars = Car::with('company')->where('company_id', $id)->where('status', '0')->get();
+        if (Auth::check()) {
             $favCars = $user->cars->pluck('id')->toArray();
             return view('user.detail', compact('cars', 'company', 'favCars'));
-
         }
         return view('user.detail', compact('cars', 'company'));
-
     }
 
     public function detail($id)
@@ -297,8 +295,8 @@ class CarController extends Controller
     public function mostinterest()
     {
         $cars = Car::with('company')
-            ->where('view','>', 0)  // Filter out records with 0 views
-            ->orderBy('view','desc')        // Order by the 'view' attribute
+            ->where('view', '>', 0)  // Filter out records with 0 views
+            ->orderBy('view', 'desc')        // Order by the 'view' attribute
             ->take(10)               // Take the top 10 records
             ->get();
         $user = Auth::user();
@@ -396,7 +394,7 @@ class CarController extends Controller
         $models = Car::select('name')->distinct()->pluck('name');
         $colors = Car::select('body_color')->distinct()->pluck('body_color');
 
-        $cars = Car::where('status',"0")->get();
+        $cars = Car::where('status', '0')->get();
         $user = Auth::user();
         if ($user) {
             $favCars = $user->cars->pluck('id')->toArray();
@@ -410,28 +408,28 @@ class CarController extends Controller
         $search = $request->key;
 
         $car = Car::with('company')->where('status', "0")
-    ->where(function($query) use ($search) {
-        $query->where('name', 'LIKE', "%{$search}%")
-              ->orWhere('model', 'LIKE', "%{$search}%")
-              ->orWhere('type', 'LIKE', "%{$search}%")
-              ->orWhere('body_color', 'LIKE', "%{$search}%")
-              ->orWhere('price', 'LIKE', "%{$search}%")
-              ->orWhere('max_power', 'LIKE', "%{$search}%")
-              ->orWhere('mileage', 'LIKE', "%{$search}%")
-              ->orWhere('position', 'LIKE', "%{$search}%")
-              ->orWhere('transmission', 'LIKE', "%{$search}%");
-    })
-    ->orWhereHas('company', function($query) use ($search) {
-        $query->where('name', 'LIKE', "%{$search}%");
-    })
-    ->get();
+            ->where(function ($query) use ($search) {
+                $query->where('name', 'LIKE', "%{$search}%")
+                    ->orWhere('model', 'LIKE', "%{$search}%")
+                    ->orWhere('type', 'LIKE', "%{$search}%")
+                    ->orWhere('body_color', 'LIKE', "%{$search}%")
+                    ->orWhere('price', 'LIKE', "%{$search}%")
+                    ->orWhere('max_power', 'LIKE', "%{$search}%")
+                    ->orWhere('mileage', 'LIKE', "%{$search}%")
+                    ->orWhere('position', 'LIKE', "%{$search}%")
+                    ->orWhere('transmission', 'LIKE', "%{$search}%");
+            })
+            ->orWhereHas('company', function ($query) use ($search) {
+                $query->where('name', 'LIKE', "%{$search}%");
+            })
+            ->get();
         return response()->json($car);
     }
 
     public function carsearch(Request $request)
     {
         // $query = Car::query();
-        $query = Car::with('company')->where('status',"0");
+        $query = Car::with('company')->where('status', "0");
 
 
         if ($request->filled('brand')) {
@@ -470,14 +468,15 @@ class CarController extends Controller
         return response()->json($data, 200);
     }
 
-    public function bestsellcar($name){
+    public function bestsellcar($name)
+    {
         $user = Auth::user();
-        $cars = Car::where('name', $name)->where('status','0')->get();
+        $cars = Car::where('name', $name)->where('status', '0')->get();
         $companyNames = $cars->pluck('company.name')->toArray();
         if ($user) {
             $favCars = $user->cars->pluck('id')->toArray();
-            return view('user.bestsell', compact('cars','favCars','companyNames'));
+            return view('user.bestsell', compact('cars', 'favCars', 'companyNames'));
         }
-        return view('user.bestsell', compact('cars','companyNames'));
+        return view('user.bestsell', compact('cars', 'companyNames'));
     }
 }

@@ -10,7 +10,7 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="text-content">
-                        <h2>Contact Us</h2>
+                        <h2>{{ __('messages.contact') }}</h2>
                     </div>
                 </div>
             </div>
@@ -23,19 +23,19 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="section-heading">
-                        <h2>Our Office Address</h2>
+                        <h2>{{ __('messages.our_office_address') }}</h2>
                     </div>
                 </div>
 
                 <div class="col-md-12">
                     <div class="left-content">
-                        <h4>Address</h4>
+                        <h4>{{ __('messages.address') }}</h4>
                         <p>{{$contact->address}}</p>
-                        <h4>Email</h4>
+                        <h4>{{ __('messages.email') }}</h4>
                         <p>{{$contact->email}}</p>
-                        <h4>Phone Number</h4>
+                        <h4>{{ __('messages.phone') }}</h4>
                         <p>{{$contact->phone}}</p>
-                        <p>you can contact us on the above details
+                        <p>{{ __('messages.contact_me') }}
                         </p>
                     </div>
                 </div>

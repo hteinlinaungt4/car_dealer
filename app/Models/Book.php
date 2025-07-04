@@ -15,5 +15,20 @@ class Book extends Model
         return $this->belongsTo(Car::class);
     }
 
-    protected $fillable = ['name','email','phone','car_id','message','status'];
+    protected $fillable = ['name','email','phone','car_id','message','status','user_id','invoices'];
+
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+
+    public function invoice()
+    {
+        return $this->hasOne(Invoice::class, 'book_id');
+    }
+
+
+
 }

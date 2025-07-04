@@ -9,8 +9,8 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="text-content">
-                        <h4>Most Interest</h4>
-                        <h2>Cars</h2>
+                        <h4>{{ __("messages.most_interest_car")}}</h4>
+                        <h2>{{ __("messages.cars")}}</h2>
                     </div>
                 </div>
             </div>
@@ -45,7 +45,7 @@
                                                     @endif
                                                 </div>
                                             @endif --}}
-                                                <h4>{{$c->company->name}} {{ $c->name }} {{ $c->model }}</h4>
+                                                <h4> {{ $c->name }} {{ $c->model }}</h4>
 
                                             <h6> {{ $c->price }} (Lakh)</h6>
 

@@ -9,7 +9,7 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="text-content">
-                        <h2>Favourite List</h2>
+                        <h2>{{ __('messages.favorite')}}</h2>
                     </div>
                 </div>
             </div>
@@ -38,17 +38,17 @@
                                     </div>
                                     <div class="col-md-8">
                                         <div class="left-content">
-                                            <h6>Model</h6>
+                                            <h6>{{__('messages.model')}}</h6>
                                             <p>{{ $f->name }}</p>
-                                            <h6>Color</h6>
+                                            <h6>{{__('messages.color')}}</h6>
                                             <p>{{ $f->body_color }}</p>
-                                            <h6>Position</h6>
+                                            <h6>{{__('messages.steering_position')}}</h6>
                                             <p>{{ $f->position }}</p>
-                                            <h6>Price</h6>
+                                            <h6>{{__('messages.price')}}</h6>
                                             <p>{{ $f->price }} (Lakh)</p>
                                         </div>
                                         <button data-id="{{ $f->id }}"
-                                            class="btn btn-danger btn-sm mt-3 delete_btn">Remove Favourite</button>
+                                            class="btn btn-danger btn-sm mt-3 delete_btn">{{__('messages.remove_favourite')}}</button>
                                     </div>
                                 </div>
                             </div>

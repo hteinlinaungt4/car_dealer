@@ -28,7 +28,6 @@ class Car extends Model
         'fuel_type',
         'mileage',
         'transmission',
-        'no_of_owners',
         'description',
         'max_power',
         'position',

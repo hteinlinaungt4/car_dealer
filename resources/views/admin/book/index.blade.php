@@ -29,14 +29,25 @@
 @section('script')
     <script>
         $(document).ready(function() {
+
+            function updateSelectDisabling() {
+                $('.status-select').each(function() {
+                    var status = $(this).val();
+                    if (status === 'pending') {
+                        $(this).prop('disabled', false);
+                    } else {
+                        $(this).prop('disabled', true);
+                    }
+                });
+            }
+
             var table = $('#usertable').DataTable({
                 mark: true,
                 responsive: true,
                 processing: true,
                 serverSide: true,
                 ajax: 'ssd/book',
-                columns: [
-                    {
+                columns: [{
                         data: 'car_id',
                         name: 'car_id'
                     },
@@ -67,7 +78,12 @@
                         orderable: false
                     }
                 ],
+                drawCallback: function() {
+                    updateSelectDisabling(); // Call after every draw
+                }
             });
+
+            updateSelectDisabling(); // Initial call
 
             @if (session('successmsg'))
                 Swal.fire({
@@ -77,39 +93,129 @@
                 });
             @endif
 
-            $(document).on('click', '.status-btn', function(e) {
-            e.preventDefault();
-            var id = $(this).data('id');
-            var status = $(this).data('status');
-            var car_id = $(this).data('car_id');
-            var newStatus = status == '0' ? '1' : '0';
-            var url = `/book/${id}/status`;
-            $.ajax({
-                url: url,
-                type: 'POST',
-                data: {
-                    _token: '{{ csrf_token() }}',
-                    status: newStatus,
-                    car_id
-                },
-                success: function(response) {
-                            table.ajax.reload();
-                            Swal.fire(
-                                'Updated!',
-                                'Status has been updated.',
-                                'success'
-                            )
-                        },
-                        error: function(xhr) {
-                            console.error(xhr.responseText);
-                            Swal.fire(
-                                'Error!',
-                                'There was an error updating the status.',
-                                'error'
-                            )
-                        }
-            });
+            // $(document).on('change', '.status-select', function(e) {
+            //     e.preventDefault();
+            //     var id = $(this).data('id');
+            //     var status = $(this).val();
+            //     var car_id = $(this).data('car_id');
+            //     var url = `/book/${id}/status`;
+
+            //     // AJAX call to update the status
+            //     $.ajax({
+            //         url: url,
+            //         type: 'POST',
+            //         data: {
+            //             _token: '{{ csrf_token() }}',
+            //             status: status,
+            //             car_id: car_id
+            //         },
+            //         success: function(response) {
+            //             table.ajax.reload(null, false); // Reload table without resetting pagination
+            //             Swal.fire(
+            //                 'Updated!',
+            //                 'Status has been updated.',
+            //                 'success'
+            //             );
+            //         },
+            //         error: function(xhr) {
+            //             console.error(xhr.responseText);
+            //             Swal.fire(
+            //                 'Error!',
+            //                 'There was an error updating the status.',
+            //                 'error'
+            //             );
+            //         }
+            //     });
+            // });
+
+            $(document).on('change', '.status-select', function(e) {
+    e.preventDefault();
+
+    var id = $(this).data('id');
+    var car_id = $(this).data('car_id');
+    var status = $(this).val();
+    var url = `/book/${id}/status`;
+
+    // If the status is "Confirm Request", show date picker
+    if (status === 'confirmed') {
+        Swal.fire({
+            title: 'Select Testing Driving Date',
+            input: 'date',
+            inputLabel: 'Choose a date',
+            inputAttributes: {
+                min: new Date().toISOString().split('T')[0] // Optional: prevent past dates
+            },
+            showCancelButton: true,
+            confirmButtonText: 'Confirm',
+            cancelButtonText: 'Cancel',
+            inputValidator: (value) => {
+                if (!value) {
+                    return 'Please select a date!';
+                }
+            }
+        }).then((result) => {
+            if (result.isConfirmed) {
+                var testing_date = result.value;
+
+                // AJAX call after confirming date
+                $.ajax({
+                    url: url,
+                    type: 'POST',
+                    data: {
+                        _token: '{{ csrf_token() }}',
+                        status: status,
+                        car_id: car_id,
+                        testing_date: testing_date // include selected date
+                    },
+                    success: function(response) {
+                        table.ajax.reload(null, false); // Reload table without resetting pagination
+                        Swal.fire(
+                            'Updated!',
+                            'Status and test drive date have been updated.',
+                            'success'
+                        );
+                    },
+                    error: function(xhr) {
+                        console.error(xhr.responseText);
+                        Swal.fire(
+                            'Error!',
+                            'There was an error updating the status.',
+                            'error'
+                        );
+                    }
+                });
+            }
         });
+    } else {
+        // For all other statuses, just make the AJAX request directly
+        $.ajax({
+            url: url,
+            type: 'POST',
+            data: {
+                _token: '{{ csrf_token() }}',
+                status: status,
+                car_id: car_id
+            },
+            success: function(response) {
+                table.ajax.reload(null, false); // Reload table without resetting pagination
+                Swal.fire(
+                    'Updated!',
+                    'Status has been updated.',
+                    'success'
+                );
+            },
+            error: function(xhr) {
+                console.error(xhr.responseText);
+                Swal.fire(
+                    'Error!',
+                    'There was an error updating the status.',
+                    'error'
+                );
+            }
+        });
+    }
+});
+
 
         });
     </script>

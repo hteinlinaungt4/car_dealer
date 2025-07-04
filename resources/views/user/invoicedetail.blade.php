@@ -286,10 +286,7 @@
                 {{-- Replace with dynamic data: <p><strong>Note from Admin:</strong> {{ $invoice->admin_reply }}</p> --}}
             </div>
 
-            <div class="invoice-footer">
-                <p>Your Company Name &copy; {{ date('Y') }}. All Rights Reserved.</p>
-                <p>Questions? Contact us at support@yourcompany.com or visit our website at www.yourcompany.com</p>
-            </div>
+
 
         </div>
     </div>

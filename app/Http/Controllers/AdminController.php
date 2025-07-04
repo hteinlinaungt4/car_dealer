@@ -183,15 +183,26 @@ class AdminController extends Controller
 
     public function confirm(Request $request)
     {
+
+
+
         $book = Book::with('car')->findOrFail($request->book_id);
         $book->invoices = '1';
         $book->update();
+
+
+         $car = Car::findOrFail($book->car->id);
+        $car->status = $car->status == '0' ? '1' : '0';
+        $car->save();
+
         if (!$book) {
             return response()->json(['success' => false, 'message' => 'Booking not found']);
         }
         // Avoid duplicate invoices if already exists
         $existingInvoice = Invoice::where('book_id', $request->book_id)->first();
         if (!$existingInvoice) {
+
+
             $user = User::findOrFail($book->user_id);
             $test = Invoice::create([
                 'invoice_id' => 'INV-' . strtoupper(Str::random(6)),

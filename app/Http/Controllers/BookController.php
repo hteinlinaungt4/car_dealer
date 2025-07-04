@@ -87,9 +87,9 @@ class BookController extends Controller
     public function updateStatus(Request $request, $id)
     {
         // Update car availability status
-        $car = Car::findOrFail($request->car_id);
-        $car->status = $request->status == 'confirmed' ? '1' : '0';
-        $car->save();
+        // $car = Car::findOrFail($request->car_id);
+        // $car->status = $request->status == 'confirmed' ? '1' : '0';
+        // $car->save();
 
         // Update booking status
         $book = Book::findOrFail($id);

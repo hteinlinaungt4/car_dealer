@@ -7,15 +7,15 @@
             <div class="card mt-5 p-3 border-0">
                 <div class="card-header bg-white">
                     <a href="{{ route('company.create') }}" class=" text-decoration-none btn btn-sm btn-primary"><i
-                        class="fa-solid fa-circle-plus"></i> Add New</a>
+                        class="fa-solid fa-circle-plus"></i> {{ __('messages.admin_add_new')}}</a>
                 </div>
                 <div class="card-body">
                     <table class="table table-bordered text-center w-100 display nowrap"  id="usertable" >
                         <thead>
-                            <th>ID</th>
-                            <th>Image</th>
-                            <th>Name</th>
-                            <th class="nosort">Actions</th>
+                            <th>{{ __('messages.admin_id')}}</th>
+                            <th>{{ __('messages.admin_image')}}</th>
+                            <th>{{ __('messages.admin_name')}}</th>
+                            <th class="nosort">{{ __('messages.admin_action')}}</th>
                         </thead>
                     </table>
                 </div>

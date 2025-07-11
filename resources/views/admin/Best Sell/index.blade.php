@@ -9,9 +9,9 @@
                     <div class="card-body">
                         <table class="table table-bordered text-center w-100 display nowrap" id="usertable">
                             <thead>
-                                <th>Model</th>
-                                <th>Company</th>
-                                <th>Total Sell</th>
+                                <th>{{__('messages.admin_car_model')}}</th>
+                                <th>{{__('messages.admin_company')}}</th>
+                                <th>{{__('messages.admin_total_sell')}}</th>
                             </thead>
                         </table>
                     </div>

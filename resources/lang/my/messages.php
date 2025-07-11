@@ -96,5 +96,88 @@ return [
     'grand_total' => 'စုစုပေါင်း',
     'note_for_admin' => 'Admin အတွက် မှတ်စု',
     'note_description' => 'Toyota Corolla 2025 ကို ဝယ်ယူမှုအတွက် ကျေးဇူးတင်ပါသည်။ သင့်အော်ဒါကို လက်ခံပြီးဖြစ်ပြီး ပို့ဆောင်ရန် ပြင်ဆင်နေပါသည်။ နောက်အဆင့်များနှင့် ပို့ဆောင်မည့်အချိန်ကို မကြာမီဆက်သွယ်ပေးပါမည်။ အားပေးမှုကို ကျေးဇူးတင်ပါသည်။',
-    'insurance' => "ကျွန်ုပ်တို့၏ ကားများအားလုံးတွင် အာမခံ အပြည့်အဝပါရှိသောကြောင့် မောင်းနှင်နေစဉ်တွင် သင့်အတွက် အကာအကွယ်အပြည့်ရှိစေပါသည်။ သင့်ကားသည် အာမခံပါပြီးဖြစ်၍ ယုံကြည်မှုအပြည့်ဖြင့် မောင်းနှင်နိုင်ပါသည်။"
+    'insurance' => "ကျွန်ုပ်တို့၏ ကားများအားလုံးတွင် အာမခံ အပြည့်အဝပါရှိသောကြောင့် မောင်းနှင်နေစဉ်တွင် သင့်အတွက် အကာအကွယ်အပြည့်ရှိစေပါသည်။ သင့်ကားသည် အာမခံပါပြီးဖြစ်၍ ယုံကြည်မှုအပြည့်ဖြင့် မောင်းနှင်နိုင်ပါသည်။",
+
+    'admin_title' => 'အေဒါင်နီမှူးဒက်ရှ်ဘုတ်',
+    'admin_dashboard' => 'အေဒါင်နီမှူးဒက်ရှ်ဘုတ်',
+    'admin_company' => 'ကုမ္ပဏီ',
+    'admin_car' => 'ကား',
+    'admin_user_lists' => 'အသုံးပြုသူစာရင်းများ',
+    'admin_inquery_lists' => 'မေးခွန်းစာရင်းများ',
+    'admin_booking_lists' => 'ဘွတ်ကင်းစာရင်းများ',
+    'admin_confrim_process' => 'အတည်ပြုခြင်းလုပ်ငန်းစဉ်',
+    'admin_invoice_lists' => 'ငွေစာရင်းများ',
+    'admin_most_interest' => 'အများဆုံးစိတ်ဝင်စားသူများ',
+    'admin_best_sell_cars' => 'အကောင်းဆုံးရောင်းအားကားများ',
+    'admin_about_us' => 'ကျွန်ုပ်တို့အကြောင်း',
+    'admin_contact_us' => 'ကျွန်ုပ်တို့ကိုဆက်သွယ်ရန်',
+
+
+
+    'admin_user_total' => 'အသုံးပြုသူ (စုစုပေါင်း)',
+'admin_car_total' => 'ယာဉ် (စုစုပေါင်း)',
+'admin_company_total' => 'ကုမ္ပဏီ (စုစုပေါင်း)',
+'admin_booking_total' => 'အပ်နှံမှု (စုစုပေါင်း)',
+'admin_for_sell_car' => 'အရောင်းအတွက် ယာဉ် (စုစုပေါင်း)',
+'admin_sold_out_car' => 'ရောင်းပြီးသော ယာဉ် (စုစုပေါင်း)',
+
+'admin_add_new' => 'အသစ်ထည့်ပါ',
+
+'admin_id' => 'အိုင်ဒီ',
+'admin_name' => 'အမည်',
+'admin_image' => 'ပုံ',
+'admin_action' => 'ဆောင်ရွက်ချက်များ',
+
+'admin_company' => 'ကုမ္ပဏီ',
+'admin_company_name' => 'ကုမ္ပဏီအမည်',
+'admin_company_logo' => 'ကုမ္ပဏီအမှတ်တံဆိပ်',
+'admin_create' => 'ဖန်တီးပါ',
+'admin_enter_company' => 'ကုမ္ပဏီအမည် ထည့်ပါ ...',
+'admin_company_edit' => 'ကုမ္ပဏီ ပြင်ဆင်ပါ',
+'admin_update' => 'တင်ပြပါ',
+'admin_price' => 'ဈေးနှုန်း',
+'admin_status' => 'အခြေအနေ',
+
+'admin_car_create_form' => 'ယာဉ် ဖန်တီးခြင်းပုံစံ',
+'admin_car_model' => 'ယာဉ် မော်ဒယ်',
+'admin_car_year' => 'နှစ်',
+'admin_car_image1' => 'ယာဉ်ပုံ ၁',
+'admin_car_image2' => 'ယာဉ်ပုံ ၂',
+'admin_car_image3' => 'ယာဉ်ပုံ ၃',
+'admin_car_image4' => 'ယာဉ်ပုံ ၄',
+'admin_car_image5' => 'ယာဉ်ပုံ ၅',
+'admin_car_type' => 'ယာဉ်အမျိုးအစား',
+'admin_body_color' => 'အရောင်',
+'admin_price' => 'ဈေးနှုန်း',
+'admin_number' => 'ယာဉ်နံပါတ်',
+'admin_steering_position' => 'လမ်းညွှန်တပ်ဆင်မှု',
+'admin_fuel_type' => 'သက်သာသုံးရေအမျိုးအစား',
+'admin_kilometer' => 'ကီလိုမီတာ',
+'admin_transmission' => 'လွှဲပြောင်းခြင်း',
+'admin_engine_power' => 'အင်ဂျင်စွမ်းအား',
+'admin_description' => 'အကြောင်းအရာ',
+
+'admin_car_edit' => 'ယာဉ် ပြင်ဆင်ပါ',
+
+
+'admin_email' => 'အီးမေးလ်',
+'admin_address' => 'လိပ်စာ',
+'admin_phone' => 'ဖုန်းနံပါတ်',
+'admin_user' => 'အသုံးပြုသူ',
+'admin_user_message' => 'အသုံးပြုသူ၏ စာတို',
+'admin_reply' => 'ပြန်လည်တုံ့ပြန်ခြင်း',
+'admin_posting' => 'ပို့ဆောင်ခြင်းရက်',
+'admin_total_amount' => 'စုစုပေါင်း ပမာဏ',
+
+'admin_invoice_id' => 'ဘောင်ချာအိုင်ဒီ',
+'admin_sale_person' => 'အရောင်းပြုသူ',
+'admin_buyer_name' => 'ဝယ်သူအမည်',
+'admin_buyer_email' => 'ဝယ်သူအီးမေးလ်',
+'admin_confirm' => 'အတည်ပြုရက်',
+'admin_total_sell' => 'စုစုပေါင်း အရောင်း',
+
+'admin_about_edit' => 'ကျွန်ုပ်တို့အကြောင်း ပြင်ဆင်ပါ',
+'admin_contact_edit' => 'ဆက်သွယ်ရန် ပြင်ဆင်ပါ',
+
+
 ];

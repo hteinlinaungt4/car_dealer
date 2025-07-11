@@ -9,10 +9,10 @@
                 <div class="card-body">
                     <table class="table table-bordered text-center w-100 display nowrap"  id="usertable" >
                         <thead>
-                            <th>Image</th>
-                            <th>Name</th>
-                            <th>Company</th>
-                            <th>Price</th>
+                            <th>{{__('messages.admin_image')}}</th>
+                            <th>{{__('messages.admin_name')}}</th>
+                            <th>{{__('messages.admin_company')}}</th>
+                            <th>{{__('messages.admin_price')}}</th>
                         </thead>
                     </table>
                 </div>

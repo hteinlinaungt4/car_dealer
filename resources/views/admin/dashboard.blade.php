@@ -29,22 +29,25 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/datatables.mark.js/2.0.0/datatables.mark.min.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/plug-ins/1.10.13/features/mark.js/datatables.mark.min.css">
     <style>
-.color {
-  /* The dark background from the theme */
-  /* background-color: #212529; */
-    background-color: #203354;
-  /* Off-white text for good readability */
-  color: #F8F9FA;
+        .color {
+            /* The dark background from the theme */
+            /* background-color: #212529; */
+            background-color: #203354;
+            /* Off-white text for good readability */
+            color: #F8F9FA;
 
-  /* The red accent used for a strong border */
-  /* border: 3px solid #E63946; */
+            /* The red accent used for a strong border */
+            /* border: 3px solid #E63946; */
 
-  /* Some extra styling to make it look nice */
-  padding: 25px;
-  /* border-radius: 8px; */
-  font-size: 1.2em;
-  font-weight: bold;
-}
+            /* Some extra styling to make it look nice */
+            padding: 25px;
+            /* border-radius: 8px; */
+            font-size: 1.2em;
+            font-weight: bold;
+        }
+        .hello a{
+            color: #858796!important;
+        }
     </style>
 
 </head>
@@ -60,7 +63,7 @@
             <!-- Sidebar - Brand -->
             <a href="{{ route('overallcount') }}"
                 class="sidebar-brand d-flex align-items-center justify-content-center">
-                <div class="sidebar-brand-text mx-3">Car Dealer</div>
+                <div class="sidebar-brand-text mx-3">{{ __('messages.admin_title')}}</div>
             </a>
             <!-- Divider -->
             <hr class="sidebar-divider my-0">
@@ -83,7 +86,7 @@
             <li class="nav-item">
                 <a class="nav-link" href="{{ route('overallcount') }}">
                     <i class="fa fa-dashboard"></i>
-                    <span>Dashboard</span>
+                    <span>{{ __('messages.admin_dashboard')}}</span>
                 </a>
             </li>
 
@@ -91,7 +94,7 @@
             <li class="nav-item">
                 <a class="nav-link" href="{{ route('company.index') }}">
                     <i class="fa fa-university"></i>
-                    <span>Company</span>
+                    <span>{{ __('messages.admin_company')}}</span>
                 </a>
             </li>
 
@@ -99,66 +102,66 @@
             <li class="nav-item">
                 <a class="nav-link" href="{{ route('car.index') }}">
                     <i class="fas fa-car"></i>
-                    <span>Car</span></a>
+                    <span>{{ __('messages.admin_car')}}</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{ route('userlist') }}">
+                    <i class="fas fa-users"></i>
+                    <span>{{ __('messages.admin_user_lists')}}</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{ route('admin.inquiries.index') }}">
+                    <i class="fa-solid fa-book"></i>
+                    <span>{{ __('messages.admin_inquery_lists')}}</span></a>
             </li>
 
             <!-- Nav Item - Tables -->
             <li class="nav-item">
                 <a class="nav-link" href="{{ route('admin.book') }}">
                     <i class="fa-solid fa-book"></i>
-                    <span>Booking Lists</span></a>
-            </li>
-
-            <li class="nav-item">
-                <a class="nav-link" href="{{ route('admin.inquiries.index') }}">
-                    <i class="fa-solid fa-book"></i>
-                    <span>Inquery Lists</span></a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="{{ route('admin.invoices.index') }}">
-                    <i class="fa-solid fa-book"></i>
-                    <span>Invoice Lists</span></a>
+                    <span>{{ __('messages.admin_booking_lists')}}</span></a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="{{ route('admin.process.index') }}">
                     <i class="fa-solid fa-book"></i>
-                    <span>Confrim Process</span></a>
+                    <span>{{ __('messages.admin_confrim_process')}}</span></a>
             </li>
 
+
             <li class="nav-item">
-                <a class="nav-link" href="{{ route('userlist') }}">
-                    <i class="fas fa-users"></i>
-                    <span>User Lists</span>
-                </a>
+                <a class="nav-link" href="{{ route('admin.invoices.index') }}">
+                    <i class="fa-solid fa-book"></i>
+                    <span>{{ __('messages.admin_invoice_lists')}}</span></a>
             </li>
+
 
 
             <li class="nav-item">
                 <a class="nav-link" href="{{ route('most') }}">
                     <i class="fa fa-car"></i>
-                    <span>Most Interest</span>
+                    <span>{{ __('messages.admin_most_interest')}}</span></a>
                 </a>
             </li>
 
             <li class="nav-item">
                 <a class="nav-link" href="{{ route('best') }}">
                     <i class="fa fa-car"></i>
-                    <span>Best Sell Cars</span>
+                    <span>{{ __('messages.admin_best_sell_cars')}}</span></a>
                 </a>
             </li>
 
             <li class="nav-item">
                 <a class="nav-link" href="{{ route('admin.about') }}">
                     <i class="fa fa-bookmark"></i>
-                    <span>About Us</span>
+                    <span>{{ __('messages.admin_about_us')}}</span></a>
                 </a>
             </li>
 
             <li class="nav-item">
                 <a class="nav-link" href="{{ route('admin.contact') }}">
                     <i class="fa fa-bookmark"></i>
-                    <span>Contact</span>
-                </a>
+                    <span>{{ __('messages.admin_contact_us')}}</span></a>
             </li>
 
             <!-- Divider -->
@@ -184,6 +187,30 @@
                     </button>
                     <!-- Topbar Navbar -->
                     <ul class="navbar-nav ml-auto">
+
+
+                        <li class="dropdown nav-item hello">
+                            <a href="#" class="nav-link" data-toggle="dropdown" aria-haspopup="true"
+                                aria-expanded="false">
+                                <i class="fa fa-globe mr-2"></i>
+                                {{ app()->getLocale() == 'en' ? 'English' : 'Myanmar' }}
+                                <i class="fa fa-angle-down" aria-hidden="true"></i>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li class="nav-item">
+                                    <a class="nav-link {{ app()->getLocale() == 'en' ? 'active' : '' }}"
+                                        href="{{ route('locale.switch', ['locale' => 'en']) }}">
+                                        English
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link {{ app()->getLocale() == 'my' ? 'active' : '' }}"
+                                        href="{{ route('locale.switch', ['locale' => 'my']) }}">
+                                        Myanmar
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
                         <!-- Nav Item - User Information -->
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"

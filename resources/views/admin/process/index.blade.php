@@ -142,13 +142,13 @@
                         <table class="table table-bordered text-center w-100 display nowrap" id="usertable">
                             <thead>
                                 <tr>
-                                    <th>User Name</th>
-                                    <th>User Email</th>
-                                    <th>User Phone</th>
-                                    <th>Car Name</th>
-                                    <th>Total Amount</th>
-                                    <th>Posting Date</th>
-                                    <th class="nosort">Actions</th>
+                                    <th>{{ __('messages.admin_name')}}</th>
+                                    <th>{{__('messages.admin_email')}}</th>
+                                    <th>{{__('messages.admin_phone')}}</th>
+                                    <th>{{__('messages.admin_car_model')}}</th>
+                                    <th>{{__('messages.admin_total_amount')}}</th>
+                                    <th>{{__('messages.admin_posting')}}</th>
+                                    <th class="nosort">{{__('messages.admin_action')}}</th>
                                 </tr>
                             </thead>
                         </table>

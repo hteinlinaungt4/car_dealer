@@ -152,8 +152,15 @@ class AdminController extends Controller
                     $disabled = '';
 
                     if ($each->invoices == '0') {
-                        $buttonClass = 'btn-success confirm-booking-btn';
-                        $buttonText = 'Confirm Payment';
+                        if ($each->status == 'rejected' || $each->status == 'pending') {
+                            $buttonClass = 'btn-success confirm-booking-btn';
+                            $buttonText = 'Confirm Payment';
+                            $disabled = 'disabled';
+                        }else {
+                            $buttonClass = 'btn-success confirm-booking-btn';
+                            $buttonText = 'Confirm Payment';
+                        }
+
                     } else {
                         $buttonClass = 'btn-secondary';
                         $buttonText = 'Payment Confirmed';

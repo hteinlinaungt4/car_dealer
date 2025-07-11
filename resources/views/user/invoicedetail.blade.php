@@ -286,8 +286,6 @@
                 {{-- Replace with dynamic data: <p><strong>Note from Admin:</strong> {{ $invoice->admin_reply }}</p> --}}
             </div>
 
-
-
         </div>
     </div>
 </div>

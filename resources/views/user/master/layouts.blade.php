@@ -72,8 +72,8 @@
                                     <li class="nav-item"><a class="nav-link"
                                             href="{{ route('userpassword#changepage') }}"> {{ __('messages.password_update') }}</a></li>
                                     <li class="nav-item"><a class="nav-link" href="{{ route('fav') }}">{{ __('messages.favorite') }}</a></li>
-                                    <li class="nav-item"><a class="nav-link" href="{{ route('booking') }}">{{ __('messages.booking') }}</a></li>
                                     <li class="nav-item"><a class="nav-link" href="{{ route('inquiries.index') }}">{{ __('messages.inquires') }}</a></li>
+                                    <li class="nav-item"><a class="nav-link" href="{{ route('booking') }}">{{ __('messages.booking') }}</a></li>
                                      <li class="nav-item"><a class="nav-link" href="{{ route('user.invoices') }}">
                                             {{ __('messages.invoices') }}</a></li>
                                     <li class="nav-item">

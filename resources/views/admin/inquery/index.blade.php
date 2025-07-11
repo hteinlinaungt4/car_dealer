@@ -9,11 +9,11 @@
                         <table class="table table-bordered text-center w-100 display nowrap" id="usertable">
                             <thead>
                                 <tr>
-                                    <th>User</th>
-                                    <th>Car</th>
-                                    <th>User Message</th>
-                                    <th>Reply</th>
-                                    <th class="nosort">Actions</th>
+                                    <th>{{__('messages.admin_user')}}</th>
+                                    <th>{{__('messages.admin_car')}}</th>
+                                    <th>{{__('messages.admin_user_message')}}</th>
+                                    <th>{{__('messages.admin_reply')}}</th>
+                                    <th class="nosort">{{ __('messages.admin_action')}}</th>
                                 </tr>
                             </thead>
                         </table>

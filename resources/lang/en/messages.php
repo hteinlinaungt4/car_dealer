@@ -101,6 +101,96 @@ return [
     'note_for_admin' => 'Note for Admin',
     'note_description' => ' Thank you for your recent purchase of the Toyota Corolla 2025. Your order has been processed, and we are now preparing your vehicle for delivery. We will reach out shortly with details regarding the next steps and expected delivery timeline. We appreciate your business!',
 
-    'insurance' => "All our vehicles come with complete insurance coverage, ensuring you're fully protected while driving. You can drive with confidence, knowing that your car is insured and ready to go!."
+    'insurance' => "All our vehicles come with complete insurance coverage, ensuring you're fully protected while driving. You can drive with confidence, knowing that your car is insured and ready to go!.",
+
+    'admin_title' => 'Admin Dashboard',
+    'admin_dashboard' => 'Admin Dashboard',
+    'admin_company' => 'Company',
+    'admin_car' => 'Car',
+    'admin_user_lists' => 'User Lists',
+    'admin_inquery_lists' => 'Inquiry Lists',
+    'admin_booking_lists' => 'Booking Lists',
+    'admin_confrim_process' => 'Confirm Process',
+    'admin_invoice_lists' => 'Invoice Lists',
+    'admin_most_interest' => 'Most Interest',
+    'admin_best_sell_cars' => 'Best Sell Cars',
+    'admin_about_us' => 'About Us',
+    'admin_contact_us' => 'Contact Us',
+
+    'admin_user_total' => ' User (Total)',
+    'admin_car_total' => ' Car (Total)',
+    'admin_company_total' => ' Company (Total)',
+    'admin_booking_total' => ' Booking (Total)',
+    'admin_for_sell_car' => 'For Sell Car (Total)',
+    'admin_sold_out_car' => 'Sold Out Car (Total)',
+
+    'admin_add_new' => 'Add New',
+
+    'admin_id' => 'ID',
+    'admin_name' => 'Name',
+
+    'admin_image' => 'Image',
+    'admin_action' => 'Actions',
+
+    'admin_company' => 'Company',
+    'admin_company_name' => 'Company Name',
+    'admin_company_logo' => 'Company Logo',
+    'admin_create' => 'Create',
+    'admin_enter_company' => 'Enter Company Name ...',
+    'admin_company_edit' => 'Edit Company',
+    'admin_update' => 'Update',
+    'admin_price' => 'Price',
+    'admin_status' => 'Status',
+
+    'admin_car_create_form' => 'Car Create Form',
+    'admin_car_model' => 'Car Model',
+    'admin_car_year' => 'Year',
+    'admin_car_image1' => 'Car Image 1',
+    'admin_car_image2' => 'Car Image 2',
+    'admin_car_image3' => 'Car Image 3',
+    'admin_car_image4' => 'Car Image 4',
+    'admin_car_image5' => 'Car Image 5',
+    'admin_car_type' => 'Car Type',
+    'admin_body_color' => 'Color',
+    'admin_price' => 'Price',
+    'admin_number' => 'Car Number',
+    'admin_steering_position' => 'Steering Position',
+    'admin_fuel_type' => 'Fuel Type',
+    'admin_kilometer' => 'Kilometer',
+    'admin_transmission' => 'Transmission',
+    'admin_engine_power' => 'Engine Power',
+    'admin_description' => 'Description',
+
+    'admin_car_edit' => 'Edit Car',
+
+
+    'admin_email' => 'Email',
+    'admin_address' => 'Address',
+    'admin_phone' => 'Phone',
+    'admin_user' => 'User',
+    'admin_user_message' => 'User Message',
+    'admin_reply' => 'Reply',
+    'admin_posting' => 'Posting Date',
+    'admin_total_amount' => 'Total Amount',
+
+    'admin_invoice_id' => 'Invoice ID',
+    'admin_sale_person' => 'Sale Person',
+    'admin_buyer_name' => 'Buyer Name',
+    'admin_buyer_email' => 'Buyer Email',
+    'admin_confirm' => 'Confirmed Date',
+    'admin_total_sell' => 'Total Sell',
+    
+    'admin_about_edit' => 'Edit About Us',
+    'admin_contact_edit' => 'Edit Contact Us',
+
+
+
+
+
+
+
+
+
+
 
 ];

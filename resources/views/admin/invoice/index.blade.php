@@ -9,12 +9,12 @@
                         <table class="table table-bordered text-center w-100 display nowrap" id="usertable">
                             <thead>
                                 <tr>
-                                    <th>Invoice Id</th>
-                                    <th>Sales Person</th>
-                                    <th>Buyer Name</th>
-                                    <th>Buyer Email</th>
-                                    <th>Total Amount</th>
-                                    <th>Confirmed_at</th>
+                                    <th>{{__('messages.admin_invoice_id')}}</th>
+                                    <th>{{__('messages.admin_sale_person')}}</th>
+                                    <th>{{__('messages.admin_buyer_name')}}</th>
+                                    <th>{{__('messages.admin_buyer_email')}}</th>
+                                    <th>{{ __('messages.admin_total_amount')}}</th>
+                                    <th>{{__('messages.admin_confirm')}}</th>
                                 </tr>
                             </thead>
                         </table>

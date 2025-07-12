@@ -179,9 +179,15 @@ return [
     'admin_buyer_email' => 'Buyer Email',
     'admin_confirm' => 'Confirmed Date',
     'admin_total_sell' => 'Total Sell',
-    
+
     'admin_about_edit' => 'Edit About Us',
     'admin_contact_edit' => 'Edit Contact Us',
+
+    'admin_change_password' => 'Change Password',
+    'admin_old_password' => 'Old Password',
+    'admin_new_password' => 'New Password',
+    'admin_confirm_password' => 'Confirm Password',
+    'admin_logout' => 'Logout',
 
 
 

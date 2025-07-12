@@ -12,13 +12,13 @@
                 <div class="card">
                     <div class="card-body">
                         <div class="card-title">
-                            <h3 class="text-center title-2">Change Password</h3>
+                            <h3 class="text-center title-2">{{ __('messages.change_password')}}</h3>
                         </div>
                         <hr>
                         <form action="{{ route('adminpassword#change') }}" method="post" novalidate="novalidate">
                             @csrf
                             <div class="form-group mb-3 ">
-                                <label for="cc-payment" class="control-label mb-1">Old Password</label>
+                                <label for="cc-payment" class="control-label mb-1">{{ __('messages.old_password')}}</label>
                                 <input id="cc-pament" value="" name="oldpassword" type="password" class="form-control @error('oldpassword') is-invalid @enderror" aria-required="true" aria-invalid="false" placeholder="Old password ..">
                                 @error('oldpassword')
                                     <div class="invalid-feedback">
@@ -27,7 +27,7 @@
                                 @enderror
                             </div>
                             <div class="form-group mb-3">
-                                <label for="cc-payment" class="control-label mb-1">New Password</label>
+                                <label for="cc-payment" class="control-label mb-1">{{ __('messages.new_password')}}</label>
                                 <input id="cc-pament" value="" name="newpassword" type="password" class="form-control @error('newpassword') is-invalid @enderror" aria-required="true" aria-invalid="false" placeholder="New password ..">
                                 @error('newpassword')
                                 <div class="invalid-feedback">
@@ -36,7 +36,7 @@
                             @enderror
                             </div>
                             <div class="form-group mb-3">
-                                <label for="cc-payment" class="control-label mb-1">Comfirm Password</label>
+                                <label for="cc-payment" class="control-label mb-1">{{ __('messages.admin_confirm_password')}}</label>
                                 <input id="cc-pament" value="" name="comfirmpassword" type="password" class="form-control @error('comfirmpassword') is-invalid @enderror" aria-required="true" aria-invalid="false" placeholder="Comfirm password ..">
                                 @error('comfirmpassword')
                                 <div class="invalid-feedback">
@@ -47,8 +47,7 @@
 
                             <div>
                                 <button id="payment-button" type="submit" class="btn btn-lg btn-info btn-block w-100 my-3">
-                                    <span id="payment-button-amount">Change Password</span>
-                                    <span id="payment-button-sending" style="display:none;">Sending…</span>
+                                    <span id="payment-button-amount">{{ __('messages.change_password')}}</span>
                                 </button>
                             </div>
                         </form>

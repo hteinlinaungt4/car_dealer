@@ -225,13 +225,13 @@
                                 aria-labelledby="userDropdown">
                                 <a class="dropdown-item" href="{{ route('adminpassword#changepage') }}">
                                     <i class="fas fa-lock fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    Change Password
+                                   {{__('messages.admin_change_password')}}
                                 </a>
                                 <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" href="#" data-toggle="modal"
                                     data-target="#logoutModal">
                                     <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    Logout
+                                    {{ __('messages.admin_logout') }}
                                 </a>
                             </div>
                         </li>

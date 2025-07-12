@@ -180,4 +180,15 @@ return [
 'admin_contact_edit' => 'ဆက်သွယ်ရန် ပြင်ဆင်ပါ',
 
 
+'admin_change_password' => 'စကားဝှက်ပြောင်းရန်',
+
+'admin_old_password' => 'ဟောင်းသောစကားဝှက်',
+
+'admin_new_password' => 'အသစ်သောစကားဝှက်',
+
+'admin_confirm_password' => 'စကားဝှက်အတည်ပြုရန်',
+
+'admin_logout' => 'ထွက်မည်'
+
+
 ];

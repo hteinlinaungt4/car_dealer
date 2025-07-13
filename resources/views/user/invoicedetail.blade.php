@@ -228,7 +228,7 @@
                 </div>
                 <div class="right-align">
                     <strong>{{__('messages.email')}}:</strong>
-                    <span>{{$invoice->buyer_name}}</span> {{-- Replace with dynamic data: {{ $invoice->customer->email }} --}}
+                    <span>{{$invoice->buyer_email}}</span> {{-- Replace with dynamic data: {{ $invoice->customer->email }} --}}
                 </div>
             </div>
 
@@ -266,7 +266,7 @@
                 <div class="row">
                     <div class="col-md-6">
                         <strong>{{__('messages.payment_method')}}:</strong>
-                        <p>Credit Card</p> {{-- e.g., Visa, MasterCard --}}
+                        <p>{{ $invoice->payment_type}}</p> {{-- e.g., Visa, MasterCard --}}
                     </div>
                     <div class="col-md-6 text-md-right">
                         <strong>{{__('messages.payment_type')}}:</strong>

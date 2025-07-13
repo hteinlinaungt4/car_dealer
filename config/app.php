@@ -70,7 +70,7 @@ return [
     |
     */
 
-    'timezone' => 'UTC',
+    'timezone' => 'Asia/Yangon', // Set to Asia/Yangon for Myanmar timezone
 
     /*
     |--------------------------------------------------------------------------

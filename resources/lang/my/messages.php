@@ -188,7 +188,9 @@ return [
 
 'admin_confirm_password' => 'စကားဝှက်အတည်ပြုရန်',
 
-'admin_logout' => 'ထွက်မည်'
+'admin_logout' => 'ထွက်မည်',
+
+'admin_payment_type' => 'ငွေပေးချေမှုအမျိုးအစား',
 
 
 ];

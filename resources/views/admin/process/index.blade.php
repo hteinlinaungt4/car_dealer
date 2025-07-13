@@ -1,136 +1,4 @@
-{{-- @extends('admin.dashboard')
-@section('title', 'User Lists')
-@section('content')
-    <div class="container-fluid">
-        <div class="row justify-content-center">
-            <div class="col-md-12">
-                <div class="card mt-5 p-3 border-0">
-                    <div class="card-body">
-                        <table class="table table-bordered text-center w-100 display nowrap" id="usertable">
-                            <thead>
-                                <tr>
-                                    <th>User Name</th>
-                                    <th>User Email</th>
-                                    <th>User Phone</th>
-                                    <th>Car Name</th>
-                                    <th>Total Amount</th>
-                                    <th>Posting Date</th>
-                                    <th class="nosort">Actions</th>
-                                </tr>
-                            </thead>
-                        </table>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-@endsection
 
-@section('script')
-    <script>
-        $(document).ready(function() {
-
-            function updateSelectDisabling() {
-                $('.status-select').each(function() {
-                    var status = $(this).val();
-                    if (status === 'pending') {
-                        $(this).prop('disabled', false);
-                    } else {
-                        $(this).prop('disabled', true);
-                    }
-                });
-            }
-
-            var table = $('#usertable').DataTable({
-                mark: true,
-                responsive: true,
-                processing: true,
-                serverSide: true,
-                ajax: '/process/ssd',
-                columns: [{
-                        data: 'car_id',
-                        name: 'car_id'
-                    },
-                    {
-                        data: 'name',
-                        name: 'name'
-                    },
-                    {
-                        data: 'email',
-                        name: 'email'
-                    },
-                    {
-                        data: 'phone',
-                        name: 'phone'
-                    },
-                    {
-                        data: 'message',
-                        name: 'message'
-                    },
-                    {
-                        data: 'created_at',
-                        name: 'created_at'
-                    },
-                    {
-                        data: 'actions',
-                        name: 'actions',
-                        class: 'text-center',
-                        orderable: false
-                    }
-                ],
-                drawCallback: function() {
-                    updateSelectDisabling(); // Call after every draw
-                }
-            });
-
-            updateSelectDisabling(); // Initial call
-
-            @if (session('successmsg'))
-                Swal.fire({
-                    icon: 'success',
-                    title: 'Success...',
-                    text: '{{ session('successmsg') }}',
-                });
-            @endif
-
-            $(document).on('change', '.status-select', function(e) {
-                e.preventDefault();
-                var id = $(this).data('id');
-                var status = $(this).val();
-                var car_id = $(this).data('car_id');
-                var url = `/book/${id}/status`;
-
-                // AJAX call to update the status
-                $.ajax({
-                    url: url,
-                    type: 'POST',
-                    data: {
-                        _token: '{{ csrf_token() }}',
-                        status: status,
-                        car_id: car_id
-                    },
-                    success: function(response) {
-                        table.ajax.reload(null, false); // Reload table without resetting pagination
-                        Swal.fire(
-                            'Updated!',
-                            'Status has been updated.',
-                            'success'
-                        );
-                    },
-                    error: function(xhr) {
-                        console.error(xhr.responseText);
-                        Swal.fire(
-                            'Error!',
-                            'There was an error updating the status.',
-                            'error'
-                        );
-                    }
-                });
-            });
-
-        });
-    </script>
-@endsection --}}
 @extends('admin.dashboard')
 @section('title', 'User Lists') {{-- Keeping original title as per request --}}
 @section('content')
@@ -147,6 +15,7 @@
                                     <th>{{__('messages.admin_phone')}}</th>
                                     <th>{{__('messages.admin_car_model')}}</th>
                                     <th>{{__('messages.admin_total_amount')}}</th>
+                                    <th>{{ __('messages.admin_payment_type')}}</th>
                                     <th>{{__('messages.admin_posting')}}</th>
                                     <th class="nosort">{{__('messages.admin_action')}}</th>
                                 </tr>
@@ -197,6 +66,10 @@
                         name: 'amount',
                     },
                     {
+                        data: 'payment_type',
+                        name : 'payment_type',
+                    },
+                    {
                         data: 'created_at',
                         name: 'created_at'
                     },
@@ -219,9 +92,11 @@
                 });
             @endif
 
+
+
             $(document).on('click', '.confirm-booking-btn', function() {
                 var bookingId = $(this).data('id');
-
+    var selectedPaymentType = $('select[name="payment_type"][data-id="' + bookingId + '"]').val();
                 Swal.fire({
                     title: 'Are you sure you want to confirm this Payment?',
                     text: "This action will set the Payment status to 'Confirmed'!",
@@ -238,7 +113,8 @@
                             method: 'POST', // Use POST for state changes
                             data: {
                                 _token: '{{ csrf_token() }}', // Laravel CSRF token
-                               book_id : bookingId
+                               book_id : bookingId,
+                                payment_type: selectedPaymentType // Send the selected payment type
                             },
                             success: function(response) {
                                 if (response.success) {

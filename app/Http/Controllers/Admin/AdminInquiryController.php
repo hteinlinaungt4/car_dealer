@@ -42,11 +42,15 @@ class AdminInquiryController extends Controller
      public function ssd(){
         $inquiries=Inquiry::with(['car','user']);
         return DataTables::of($inquiries)
-        // ->filterColumn('car_id',function($query,$keyword){
-        //     $query->whereHas('car',function($q1) use ($keyword){
-        //         $q1->where('name','like','%'.$keyword.'%');
-        //     });
-        // })
+    ->editColumn('message', function($inquiry){
+    return '<div style="max-width: auto; max-height: 100px; overflow: auto; white-space: pre-wrap;">'
+           . e($inquiry->message) . '</div>';
+})
+->editColumn('reply', function($inquiry){
+    return '<div style="max-width: 400px; max-height: 100px; overflow: auto; white-space: pre-wrap;">'
+           . e($inquiry->reply) . '</div>';
+})
+
         ->editColumn('car_id', function($inquiry){
             return $inquiry->car ? $inquiry->car->name : 'N/A';
         })
@@ -58,7 +62,7 @@ class AdminInquiryController extends Controller
 return '<a href="#" data-url="' . $url . '" class="btn btn-primary btn-sm reply">Reply</a>';
         })
 
-        ->rawColumns(['action'])
+        ->rawColumns(['action','message','reply'])
 
         ->make(true);
     }

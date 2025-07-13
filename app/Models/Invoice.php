@@ -17,6 +17,7 @@ class Invoice extends Model
         'buyer_email',
         'total_amount',
         'confirmed_at',
+        'payment_type',
     ];
 
 

@@ -132,7 +132,7 @@ class AdminController extends Controller
 
     public function ssdProcess()
     {
-        $book = Book::with('car');
+        $book = Book::with('car','invoice');
         return DataTables::of($book)
             ->filterColumn('car_id', function ($query, $keyword) {
                 $query->whereHas('car', function ($q1) use ($keyword) {
@@ -145,29 +145,39 @@ class AdminController extends Controller
             ->addColumn('amount', function ($each) {
                 return $each->car->price;
             })
+          ->editColumn('payment_type', function ($each) {
+                // Check if the conditions to disable the dropdown are met
+                $disabled = ($each->invoices == '1' || $each->status == 'rejected' || $each->status == 'pending') ? 'disabled' : '';
+                return '
+                    <select  class="form-select form-control" name="payment_type" data-id="' . $each->id . '" ' . $disabled . '>
+                        <option value="credit_card" ' . ($each->invoice->payment_type == 'credit_card' ? 'selected' : '') . '>Credit Card</option>
+                        <option value="banking" ' . ($each->invoice->payment_type == 'banking' ? 'selected' : '') . '>Banking</option>
+                        <option value="cash" ' . ($each->invoice->payment_type == 'cash' ? 'selected' : '') . '>Cash</option>
+                    </select>
+                ';
+            })
 
-           ->addColumn('actions', function ($each) {
-                    $buttonClass = '';
-                    $buttonText = '';
-                    $disabled = '';
+            ->addColumn('actions', function ($each) {
+                $buttonClass = '';
+                $buttonText = '';
+                $disabled = '';
 
-                    if ($each->invoices == '0') {
-                        if ($each->status == 'rejected' || $each->status == 'pending') {
-                            $buttonClass = 'btn-success confirm-booking-btn';
-                            $buttonText = 'Confirm Payment';
-                            $disabled = 'disabled';
-                        }else {
-                            $buttonClass = 'btn-success confirm-booking-btn';
-                            $buttonText = 'Confirm Payment';
-                        }
-
-                    } else {
-                        $buttonClass = 'btn-secondary';
-                        $buttonText = 'Payment Confirmed';
+                if ($each->invoices == '0') {
+                    if ($each->status == 'rejected' || $each->status == 'pending') {
+                        $buttonClass = 'btn-success confirm-booking-btn';
+                        $buttonText = 'Confirm Payment';
                         $disabled = 'disabled';
+                    } else {
+                        $buttonClass = 'btn-success confirm-booking-btn';
+                        $buttonText = 'Confirm Payment';
                     }
+                } else {
+                    $buttonClass = 'btn-secondary';
+                    $buttonText = 'Payment Confirmed';
+                    $disabled = 'disabled';
+                }
 
-                    return '
+                return '
                         <div class="d-flex justify-content-center">
                             <button type="button" class="btn btn-sm ' . $buttonClass . '"
                                 data-id="' . $each->id . '"
@@ -177,13 +187,13 @@ class AdminController extends Controller
                             </button>
                         </div>
                     ';
-                })
+            })
 
 
             ->addColumn('created_at', function ($each) {
                 return $each->created_at->format('Y-m-d');
             })
-            ->rawColumns(['actions'])
+            ->rawColumns(['actions','payment_type'])
             ->make(true);
     }
 
@@ -198,7 +208,7 @@ class AdminController extends Controller
         $book->update();
 
 
-         $car = Car::findOrFail($book->car->id);
+        $car = Car::findOrFail($book->car->id);
         $car->status = $car->status == '0' ? '1' : '0';
         $car->save();
 
@@ -209,7 +219,6 @@ class AdminController extends Controller
         $existingInvoice = Invoice::where('book_id', $request->book_id)->first();
         if (!$existingInvoice) {
 
-
             $user = User::findOrFail($book->user_id);
             $test = Invoice::create([
                 'invoice_id' => 'INV-' . strtoupper(Str::random(6)),
@@ -219,6 +228,7 @@ class AdminController extends Controller
                 'buyer_email' => $user->email,
                 'total_amount' => $book->car->price,
                 'confirmed_at' => now(),
+                'payment_type' => $request->payment_type, // Use the payment type from the request
             ]);
         }
         return response()->json(['success' => true]);

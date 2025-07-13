@@ -189,6 +189,8 @@ return [
     'admin_confirm_password' => 'Confirm Password',
     'admin_logout' => 'Logout',
 
+    'admin_payment_type' => 'Payment Type',
+
 
 
 

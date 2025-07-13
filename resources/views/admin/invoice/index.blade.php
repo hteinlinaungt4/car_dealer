@@ -14,6 +14,7 @@
                                     <th>{{__('messages.admin_buyer_name')}}</th>
                                     <th>{{__('messages.admin_buyer_email')}}</th>
                                     <th>{{ __('messages.admin_total_amount')}}</th>
+                                    <th>{{ __('messages.admin_payment_type')}}</th>
                                     <th>{{__('messages.admin_confirm')}}</th>
                                 </tr>
                             </thead>
@@ -55,6 +56,10 @@
                     {
                         data: 'total_amount',
                         name: 'total_amount'
+                    },
+                    {
+                        data: 'payment_type',
+                        name: 'payment_type'
                     },
                     {
                         data: 'confirmed_at',

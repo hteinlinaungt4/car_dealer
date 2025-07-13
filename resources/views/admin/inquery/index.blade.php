@@ -47,11 +47,12 @@
 
                     {
                         data: 'message',
-                        name: 'message'
+                        name: 'message',
                     },
                     {
                         data: 'reply',
                         name: 'reply'
+
                     },
                     {
                         data: 'action',

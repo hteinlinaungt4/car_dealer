@@ -266,7 +266,7 @@
                 <div class="row">
                     <div class="col-md-6">
                         <strong>{{__('messages.payment_method')}}:</strong>
-                        <p>{{ $invoice->payment_type}}</p> {{-- e.g., Visa, MasterCard --}}
+                        <p class="text-uppercase">{{ $invoice->payment_type}}</p> {{-- e.g., Visa, MasterCard --}}
                     </div>
                     <div class="col-md-6 text-md-right">
                         <strong>{{__('messages.payment_type')}}:</strong>

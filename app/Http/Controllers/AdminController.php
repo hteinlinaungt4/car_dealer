@@ -145,17 +145,21 @@ class AdminController extends Controller
             ->addColumn('amount', function ($each) {
                 return $each->car->price;
             })
-          ->editColumn('payment_type', function ($each) {
-                // Check if the conditions to disable the dropdown are met
-                $disabled = ($each->invoices == '1' || $each->status == 'rejected' || $each->status == 'pending') ? 'disabled' : '';
-                return '
-                    <select  class="form-select form-control" name="payment_type" data-id="' . $each->id . '" ' . $disabled . '>
-                        <option value="credit_card" ' . ($each->invoice->payment_type == 'credit_card' ? 'selected' : '') . '>Credit Card</option>
-                        <option value="banking" ' . ($each->invoice->payment_type == 'banking' ? 'selected' : '') . '>Banking</option>
-                        <option value="cash" ' . ($each->invoice->payment_type == 'cash' ? 'selected' : '') . '>Cash</option>
-                    </select>
-                ';
-            })
+        ->editColumn('payment_type', function ($each) {
+    $hasInvoice = is_object($each->invoices) ? $each->invoices()->exists() : ($each->invoices == '1');
+    $disabled = ($hasInvoice || $each->status == 'rejected' || $each->status == 'pending') ? 'disabled' : '';
+
+    $paymentType = optional($each->invoice)->payment_type;
+
+    return '
+        <select class="form-select form-control" name="payment_type" data-id="' . $each->id . '" ' . $disabled . '>
+            <option value="credit_card" ' . ($paymentType == 'credit_card' ? 'selected' : '') . '>Credit Card</option>
+            <option value="banking" ' . ($paymentType == 'banking' ? 'selected' : '') . '>Banking</option>
+            <option value="cash" ' . ($paymentType == 'Cash' ? 'selected' : '') . '>Cash</option>
+        </select>
+    ';
+})
+
 
             ->addColumn('actions', function ($each) {
                 $buttonClass = '';

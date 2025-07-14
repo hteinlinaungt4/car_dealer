@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('invoices', function (Blueprint $table) {
-           $table->enum('payment_type', ['credit_card', 'banking', 'Cash'])
+           $table->enum('payment_type', ['credit_card', 'banking', 'cash'])
                  ->default('credit_card')
                  ->after('salesperson_name');
         });

@@ -54,6 +54,10 @@ class BookController extends Controller
             ->addColumn('car_id', function ($each) {
                 return $each->car->name;
             })
+            ->editColumn('message',function ($each) {
+                return '<div style="max-width: auto; max-height: 100px; overflow: auto; white-space: pre-wrap;">'
+           . ($each->message) . '</div>';
+            })
             // ->addColumn('actions', function($each) {
             //     $statusButton = $each->status == '0'
             //         ? '<button class="btn btn-success status-btn"  data-car_id="' . $each->car_id . '"  data-id="' . $each->id . '" data-status="' . $each->status . '">Mark as Active</button>'
@@ -78,7 +82,7 @@ class BookController extends Controller
             ->addColumn('created_at', function ($each) {
                 return $each->created_at->format('Y-m-d');
             })
-            ->rawColumns(['actions'])
+            ->rawColumns(['actions','message'])
             ->make(true);
     }
 
